@@ -1,10 +1,4 @@
-<script>
-    import GoBack from "#lib/components/Navigation/GoBack.svelte";
-</script>
-
 <section>
-    <GoBack target="English" href="/docs/linguistics/english" />
-
     <h1>About Past Tenses in English</h1>
 
     <p>So, past tenses. They exist. Let's talk about them.</p>
