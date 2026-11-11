@@ -1,16 +1,16 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { LStorage } from "$lib/storage";
+    import { LzStorage } from "#lib/storage.js";
 
     let discoMode = $state(false);
 
     onMount(() => {
-        discoMode = LStorage.get("disco-mode", "false") === "true";
+        discoMode = LzStorage.get("disco-mode", "false") === "true";
     });
 
     $effect(() => {
         document.body.classList.toggle("disco", discoMode);
-        LStorage.set("disco-mode", String(discoMode));
+        LzStorage.set("disco-mode", String(discoMode));
     });
 
     const konamiCode = [

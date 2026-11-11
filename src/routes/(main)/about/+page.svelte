@@ -1,41 +1,48 @@
-<script>
-    import { Ia } from "$lib/components/Links";
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
+<script lang="ts">
+    import Meta from "#lib/components/Meta.svelte";
+    import { Ia } from "#lib/components/Links/index.js";
+    import type { LzMetadata } from "#lib/metadata.js";
+
+    export const metadata: LzMetadata = {
+        title: "about",
+        description:
+            "a simple FAQ section about the website to help you get started.",
+    };
 </script>
 
 <section id="faq">
-    <Breadcrumbs />
-
-    <h1>About lanzoor.dev</h1>
+    <Meta {metadata} />
 
     <p>
-        Here's a simple FAQ section about the website to help you get started!
-        If you have any questions, feel free to <a href="/contact"
-            >get in touch</a
-        >.
+        here's a simple FAQ section about the website to help you get started!
     </p>
 
-    <h2>What is this website?</h2>
-
     <p>
-        <code>lanzoor.dev</code> is a personal website featuring projects, experiments,
-        articles, and other things I create.
+        <b>
+            if you have any questions, please feel free to
+            <Ia href="/contact">get in touch</Ia>!
+        </b>
     </p>
 
-    <h2>Who maintains this website?</h2>
+    <h2>what is this website?</h2>
 
     <p>
-        This website is maintained by
-        <span class="col bright purple">Lapis Lanzuli</span>, an individual
-        developer from Korea. For more information about myself, consider
-        checking my
-        <a href="/profile">profile</a> page out!
+        <code>lanzoor.dev</code> is a personal website featuring projects, documents,
+        and other things i create.
     </p>
 
-    <h2>How was it created?</h2>
+    <h2>who maintains this website?</h2>
 
     <p>
-        The website is currently hosted on
+        this website is maintained by none other than <span
+            class="col bright purple">Lapis Lanzuli</span
+        >!
+    </p>
+
+    <h2>how was it created?</h2>
+
+    <p>
+        the website is currently hosted on
         <Ia href="https://vercel.com" external>Vercel</Ia>
         and built using
         <Ia href="https://svelte.dev/docs/kit/introduction" external
@@ -44,35 +51,47 @@
     </p>
 
     <p>
-        The <a href="/domains">domain</a> itself is registered via
+        the <Ia href="/domains">domain</Ia> itself is registered via
         <Ia href="https://porkbun.com" external>Porkbun</Ia>.
     </p>
 
-    <h2>Why was it created?</h2>
+    <h2>why?</h2>
 
     <p>
-        The website originally started with a simple profile for myself. At that
-        time, it was mostly for fun. However, over time, it grew into a
-        collection of projects and showcases.
+        <s>yes.</s>
     </p>
 
-    <h2>Can I use the content from this website?</h2>
+    <p>
+        the website originally started with a simple profile for myself. at that
+        time, it was mostly for fun. but over time i kept getting new ideas,
+        which led to the website growing into a collection of projects and
+        showcases.
+    </p>
+
+    <h2>can i use the content from this website?</h2>
 
     <p>
-        Unless otherwise stated, the content on this website primarily belongs
-        to the owner. Please ask for permission before redistributing or
-        modifying personal works.
+        unless otherwise stated,
+        <b>
+            the content on this website primarily belongs to the me and the
+            <Ia href="/credits#special-thanks">contributors</Ia>.
+        </b>
+    </p>
+
+    <p>
+        please ask for permission before redistributing or modifying personal
+        works. otherwise i'm gonna get REALLY sad and punch my monitor :c
     </p>
 
     <div class="enable-spacing dim">
-        <h2>Looking for something else?</h2>
+        <h2>looking for something else?</h2>
 
         <ul>
             <li>
-                <a href="/domains">Domain information</a>
+                <Ia href="/domains">Domain information</Ia>
             </li>
             <li>
-                <a href="/contact">Contact methods</a>
+                <Ia href="/contact">Contact methods</Ia>
             </li>
         </ul>
     </div>

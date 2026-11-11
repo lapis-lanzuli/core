@@ -1,31 +1,14 @@
-<script>
-    import { sitemap } from "$lib/map";
+<script lang="ts">
+    import type { LzMetadata } from "#lib/metadata.js";
 
-    import NotImplemented from "$lib/components/Information/NotImplemented.svelte";
-    import Redirects from "$lib/components/Information/Redirects.svelte";
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
-    import SiteMapNode from "$lib/components/Navigation/SiteMapNode.svelte";
+    export const metadata: LzMetadata = {
+        title: "map",
+        description: "a bare-bones site map",
+    };
 </script>
 
 <section>
-    <Breadcrumbs />
-
-    <h1>Site Map</h1>
-
-    <p>
-        This is a bare-bones site map generated from the internal site map for
-        generating metadata and breadcrumbs.
-    </p>
-
-    <Redirects links={["/site-map"]} />
-
-    <ul class="site-map">
-        {#each sitemap as page}
-            <li>
-                <SiteMapNode {page} />
-            </li>
-        {/each}
-    </ul>
+    <p>WORK IN PROGRESS</p>
 </section>
 
 <style lang="css">

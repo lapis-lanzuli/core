@@ -1,31 +1,17 @@
-<script lang="ts" module>
-    import BlogBreadcrumbs from "$lib/components/Navigation/BlogBreadcrumbs.svelte";
-
-    export const metadata = {
-        title: "Svelte Migration",
-        description: "A notice regarding the core migration",
-        tags: ["important", "announcement", "core"],
-        published: new Date("2026-07-11T00:00:00+09:00"),
-    };
+<script lang="ts">
+    import Meta from "#lib/components/Meta.svelte";
+    import { Ia } from "#lib/components/Links/index.ts";
+    import { blogMetadata } from "../../../metadata";
 </script>
 
-<svelte:head>
-    <title>{metadata.title}</title>
-
-    <meta name="tags" content={metadata.tags.join(", ")} />
-    <meta name="description" content={metadata.description} />
-</svelte:head>
-
 <section>
-    <BlogBreadcrumbs />
-
-    <h1>Svelte Migration: A Major Change for <code>core</code></h1>
+    <Meta metadata={blogMetadata["2026/07/svelte-migration"]} />
 
     <blockquote class="info">
         Hey! Future Lanzoor here.<br />
         The Svelte migration has been completed as of July 15th. For more information,
         please refer to
-        <a href="/projects/core/changelog#v26-25-0">the changelog</a>.
+        <Ia href="/changelog#v26-25-0">the changelog</Ia>.
     </blockquote>
 
     <p>
@@ -44,9 +30,9 @@
         As the site continued to grow, maintaining the codebase became increasingly
         challenging. Our previous custom Vite-based setup had become outdated and
         difficult to work with.<br />
-        This is when one of my <a href="/credits/contributors">team members</a> recommended
-        SvelteKit. After trying it out, I realized it was a much better fit for what
-        I wanted to achieve with the project.
+        This is when one of my <Ia href="/credits/contributors">team members</Ia
+        > recommended SvelteKit. After trying it out, I realized it was a much better
+        fit for what I wanted to achieve with the project.
     </p>
 
     <h2>What should I expect from the transition?</h2>
@@ -101,6 +87,8 @@
 
     <p>
         As of August 2026, we have backed up old <code>core</code> into the
-        <a href="https://github.com/Lanzoor/core/tree/legacy">legacy</a> branch.
+        <Ia external href="https://github.com/lapis-lanzuli/core/tree/legacy"
+            >legacy</Ia
+        > branch.
     </p>
 </section>

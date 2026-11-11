@@ -1,36 +1,28 @@
 <script lang="ts">
-    import { Ia } from "$lib/components/Links";
-
-    export const metadata = {
-        published: new Date("2026-10-07T00:00:00+09:00"),
-        commit: "https://github.com/Lanzoor/core/commit/70dfadf8e3084edfc45e85bd1220e286b9ef6ad9",
-    };
+    import { Ia } from "#lib/components/Links/index.ts";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.28.7</h2>
-
-    <p class="dim">
-        Release date: <b>October 7th, 2026</b><br />
-        Source: <Ia
-            href="https://github.com/Lanzoor/core/commit/70dfadf8e3084edfc45e85bd1220e286b9ef6ad9"
-            external>github</Ia
-        >
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-28-7"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
             <span class="col bright green">+</span>
             Added commit link attributes to changelog entries, starting from
-            <a href="/changelog/v26-28-6">v26-28-6</a>.
+            <Ia href="/changelog/v26-28-6">v26-28-6</Ia>.
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Changed the email addresses in the <a href="/contact">contact</a> page.
+            Changed the email addresses in the <Ia href="/contact">contact</Ia> page.
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Improved the design of the <a href="/404">404</a> page.
+            Improved the design of the <Ia href="/404">404</Ia> page.
         </li>
         <li>
             <span class="col bright yellow">~</span>

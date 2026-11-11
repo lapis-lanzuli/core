@@ -1,0 +1,21 @@
+
+
+text
+- color
+- font-family
+- font-style
+- font-weight
+- font-size
+- line-height
+
+background
+- background
+- background-attachment
+- background-color
+- background-clip
+- background-size
+- etc.
+
+animations
+- transition
+- animation

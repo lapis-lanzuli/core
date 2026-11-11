@@ -1,21 +1,20 @@
 <script lang="ts">
-    export const metadata = {
-        published: new Date("2026-06-10T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.23.4</h2>
-
-    <p class="dim">
-        Release date: <b>June 10th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-23-4"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
             <span class="col bright yellow">~</span>
             Fixed some in-site links using the <code>_blank</code> attribute in
-            <a href="/projects"> the projects page </a>.
+            <Ia href="/projects">the projects page</Ia>.
         </li>
         <li>
             <span class="col bright yellow">~</span><span

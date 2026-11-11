@@ -1,67 +1,19 @@
 <script lang="ts">
-    import { Ba } from "$lib/components/Links";
-    import { onMount } from "svelte";
+    import { Ba, Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import type { LzMetadata } from "#lib/metadata.js";
 
-    const INITIAL = "Hi 👋";
-
-    const messages = [
-        [30_000, "You still there?"],
-        [60_000, "You can take your time."],
-        [90_000, "You really like this page, huh."],
-        [160_000, "Okay seriously I think you forgot to close this tab."],
-        [
-            200_000,
-            "Let's just act like nothing ever happened and just move on...",
-        ],
-        [202_400, INITIAL],
-    ] as const;
-
-    let message = $state(INITIAL);
-
-    onMount(() => {
-        let timers: ReturnType<typeof setTimeout>[] = [];
-
-        function reset() {
-            for (const timer of timers) {
-                clearTimeout(timer);
-            }
-
-            message = INITIAL;
-
-            timers = messages.map(([delay, message]) =>
-                setTimeout(() => {
-                    message = message;
-                }, delay),
-            );
-        }
-
-        const events = [
-            "mousemove",
-            "scroll",
-            "click",
-            "keydown",
-            "touchstart",
-        ] as const;
-
-        for (const event of events) {
-            window.addEventListener(event, reset, { passive: true });
-        }
-
-        reset();
-
-        return () => {
-            for (const event of events) {
-                window.removeEventListener(event, reset);
-            }
-
-            for (const timer of timers) {
-                clearTimeout(timer);
-            }
-        };
-    });
+    export const metadata: LzMetadata = {
+        title: "welcome!",
+        description:
+            "a small website maintained by Lapis Lanzuli, including projects, showcases, documents, and more!",
+        useEl: false,
+    };
 </script>
 
 <section id="intro">
+    <Meta {metadata} />
+
     <header>
         <div class="left enable-layout">
             <h1 class="logo">
@@ -76,7 +28,7 @@
                 <span class="col black">//</span>
                 <span
                     class="col blue"
-                    title="yes, this is a blue archive reference."
+                    title="yes, this is a blue archive reference. how did you know?"
                 >
                     archive
                 </span>
@@ -90,23 +42,40 @@
             <hr />
 
             <p>
-                <b class="egg">{message}</b>
+                <b>hello!</b>
             </p>
 
             <p>
-                I'm <span class="col bright purple">Lapis Lanzuli</span>, a
-                student from South Korea who likes
+                <b>welcome to my little website!</b> i started making this
+                website in
+                <span class="col bright cyan">early 2026</span> as a little
+                project since i wanted a corner where people can find
+                information about me.
+                <b>
+                    this website just contains my projects and whatever my brain
+                    decided it was a good idea.
+                </b>
+            </p>
+
+            <p>
+                oh, and who am i?
+                <b>
+                    my name is <span class="col bright purple"
+                        >Lapis Lanzuli</span
+                    >!
+                </b>
+                i'm just a random student from korea who is obsessed with
                 <span class="col green">programming</span>,
                 <span class="col yellow">science</span>,
-                <span class="col orange">languages</span> and more.<br />
-
-                This website contains my projects and whatever my brain decided
-                to finish.
+                <span class="col orange">languages</span> and
+                <Ia href="/profile#interests">more</Ia>, nothing much.
             </p>
 
             <p>
+                that said, i hope you enjoy your time here.<br />
+
                 <b>
-                    Make yourself at home, explore things at your own pace and
+                    make yourself at home and
                     <span class="col bright purple">have fun!</span>
                 </b>
             </p>
@@ -123,24 +92,22 @@
         </div>
 
         <div class="right">
-            <img src="/assets/contributors/iris-modern.png" alt="Iris" />
+            <img src="/assets/iris.png" alt="[alt] my OC Iris" />
         </div>
     </header>
 </section>
-
-<div style="display: none">Nice weather today, 'innit?</div>
 
 <style lang="css">
     #intro {
         background:
             radial-gradient(
                 circle at 20% 40%,
-                rgba(120, 47, 255, 0.25),
+                /* WHEN YOU SEE IT */ rgba(120, 47, 255, 0.1727),
                 transparent 50%
             ),
             radial-gradient(
                 circle at 80% 90%,
-                rgba(100, 0, 255, 0.175),
+                rgba(100, 0, 255, 0.125),
                 transparent 50%
             ),
             black;
@@ -149,7 +116,7 @@
     }
 
     #intro header .logo {
-        font-size: clamp(1em, calc(3vw + 1em), 4em);
+        font-size: 4rem;
     }
 
     #intro header .logo::after {

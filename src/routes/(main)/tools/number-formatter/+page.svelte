@@ -1,6 +1,5 @@
 <script lang="ts">
-    import KaTeX from "$lib/components/Math/KaTeX.svelte";
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
+    import KaTeX from "#lib/components/Math/KaTeX.svelte";
     import { Decimal } from "decimal.js";
 
     type LargeNumber = {
@@ -317,8 +316,6 @@
 </script>
 
 <section>
-    <Breadcrumbs />
-
     <h1>Number Formatter</h1>
 
     <p>

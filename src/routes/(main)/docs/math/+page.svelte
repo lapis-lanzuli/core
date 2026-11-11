@@ -1,10 +1,4 @@
-<script>
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
-</script>
-
 <section>
-    <Breadcrumbs />
-
     <header>
         <h1>Math</h1>
 

@@ -9,27 +9,10 @@ export const navigationOverlay = $state<OverlayState>({
     open: false,
 });
 
-export const warpOverlay = $state<OverlayState>({
-    identifier: "warp-overlay",
-    open: false,
-});
-
-export const legalNoticeOverlay = $state<OverlayState>({
-    identifier: "legal-notice",
-    open: false,
-    closable: false,
-});
-
-export const closePriorities = [
-    warpOverlay.identifier,
-    navigationOverlay.identifier,
-    legalNoticeOverlay.identifier,
-];
+export const closePriorities = [navigationOverlay.identifier];
 
 const overlays = {
     [navigationOverlay.identifier]: navigationOverlay,
-    [warpOverlay.identifier]: warpOverlay,
-    [legalNoticeOverlay.identifier]: legalNoticeOverlay,
 };
 
 export function handleEscape() {

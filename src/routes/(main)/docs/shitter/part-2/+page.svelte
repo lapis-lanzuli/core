@@ -1,6 +1,6 @@
 <script>
-    import Break from "$lib/components/Blocks/Break.svelte";
-    import DocumentNavigation from "$lib/components/Navigation/DocumentNavigation.svelte";
+    import Break from "#lib/components/Blocks/Break.svelte";
+    import DocumentNavigation from "#lib/components/Navigation/DocumentNavigation.svelte";
     import shittyARG from "../assets/image17.png";
 </script>
 

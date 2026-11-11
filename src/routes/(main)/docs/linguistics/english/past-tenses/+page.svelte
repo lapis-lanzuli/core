@@ -1,5 +1,5 @@
 <script>
-    import GoBack from "$lib/components/Navigation/GoBack.svelte";
+    import GoBack from "#lib/components/Navigation/GoBack.svelte";
 </script>
 
 <section>

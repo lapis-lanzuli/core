@@ -1,7 +1,7 @@
 <script>
-    import Break from "$lib/components/Blocks/Break.svelte";
-    import { Ia } from "$lib/components/Links";
-    import DocumentNavigation from "$lib/components/Navigation/DocumentNavigation.svelte";
+    import Break from "#lib/components/Blocks/Break.svelte";
+    import { Ia } from "#lib/components/Links/index.js";
+    import DocumentNavigation from "#lib/components/Navigation/DocumentNavigation.svelte";
     import EditorsNote from "../EditorsNote.svelte";
 </script>
 

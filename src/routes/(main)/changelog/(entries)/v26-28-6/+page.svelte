@@ -1,31 +1,23 @@
 <script lang="ts">
-    import { Ia } from "$lib/components/Links";
-
-    export const metadata = {
-        published: new Date("2026-09-27T00:00:00+09:00"),
-        commit: "https://github.com/Lanzoor/core/commit/405a4f38d1e2a71d6605f1d04b8fc160eedfc09b",
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.28.6</h2>
-
-    <p class="dim">
-        Release date: <b>September 27th, 2026</b><br />
-        Source: <Ia
-            href="https://github.com/Lanzoor/core/commit/405a4f38d1e2a71d6605f1d04b8fc160eedfc09b"
-            external>github</Ia
-        >
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-28-6"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
             <span class="col bright yellow">~</span>
-            Improved the design of the <a href="/projects">projects</a> page.
+            Improved the design of the <Ia href="/projects">projects</Ia> page.
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Improved the design of the <a href="/404">404</a> page.
+            Improved the design of the <Ia href="/404">404</Ia> page.
         </li>
         <li>
             <span class="col bright yellow">~</span>

@@ -1,16 +1,14 @@
 <script lang="ts">
-    export const metadata = {
-        title: "The Legal Update",
-        published: new Date("2026-07-24T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>v26.26.0: The Legal Update</h2>
-
-    <p class="dim">
-        Release date: <b>July 24th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-26-0"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <p>
         <b
@@ -22,7 +20,7 @@
     <ul>
         <li>
             <span class="col bright green">+</span>
-            <b>Added the <a href="/tos">Terms of Service</a> page.</b>
+            <b>Added the <Ia href="/tos">Terms of Service</Ia> page.</b>
         </li>
         <li>
             <span class="col bright green">+</span>
@@ -34,13 +32,13 @@
         <li>
             <span class="col bright green">+</span>
             Added the ability to exit the search screen within the
-            <a href="/projects/core/changelog/">changelogs</a> by pressing the
+            <Ia href="/changelog/">changelogs</Ia> by pressing the
             <kbd>Escape</kbd> key.
         </li>
         <li>
             <span class="col bright green">+</span>
-            Added <a href="/conlangs/">conlangs</a> as a collection within the
-            <a href="/projects">projects page</a>.
+            Added <Ia href="/conlangs/">conlangs</Ia> as a collection within the
+            <Ia href="/projects">projects page</Ia>.
         </li>
         <li>
             <span class="col bright green">+</span>
@@ -72,7 +70,7 @@
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Updated <a href="/about">/about</a> to match the new changes.
+            Updated <Ia href="/about">/about</Ia> to match the new changes.
         </li>
         <li>
             <span class="col bright yellow">~</span>

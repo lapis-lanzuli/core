@@ -1,185 +1,95 @@
 <script lang="ts">
-    import { Ia } from "$lib/components/Links";
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
-    import type { BlogEntry } from "$lib/types";
-    import entries from "./(entries)/entries.json";
+    import Meta from "#lib/components/Meta.svelte";
+    import { Ba, Ia } from "#lib/components/Links/index.js";
+    import type { LzMetadata } from "#lib/metadata.js";
+    import { blogMetadata } from "./(entries)/metadata";
 
-    const availableTags = [
-        "important",
-        "serious",
-        "announcement",
-        "blog",
-        "personal",
-        "core",
-        "core-api",
-        "monthly-recap",
-    ];
+    export const metadata: LzMetadata = {
+        title: "blog",
+        description: "announcements, articles, yapping and more!",
+    };
 
-    let searchQuery = $state("");
-    let searchTags = $state<string[]>([]);
+    const entriesByYear = Object.entries(blogMetadata).reduce<
+        Record<string, Record<string, LzMetadata>>
+    >((acc, [path, metadata]) => {
+        const [year] = path.split("/");
 
-    type SortingOrder = "ascending" | "descending";
+        if (!year) return acc;
 
-    let sortingOrder = $state<SortingOrder>("descending");
+        (acc[year] ??= {})[path] = metadata;
 
-    function sortEntries(entries: BlogEntry[]) {
-        return [...entries].sort((a, b) => {
-            const result = a.published.localeCompare(b.published);
-
-            return sortingOrder === "ascending" ? result : -result;
-        });
-    }
-
-    function matchesSearchQuery(entry: BlogEntry) {
-        const query = searchQuery.trim().toLowerCase();
-
-        if (query === "") {
-            return true;
-        }
-
-        return (
-            entry.title.toLowerCase().includes(query) ||
-            entry.description?.toLowerCase().includes(query) ||
-            entry.tags?.some((tag) => tag.toLowerCase().includes(query))
-        );
-    }
-
-    function matchesSelectedTags(entry: BlogEntry) {
-        return searchTags.every((tag) => entry.tags?.includes(tag));
-    }
-
-    function groupByMonth(entries: BlogEntry[]) {
-        return Object.values(
-            entries.reduce(
-                (groups, entry) => {
-                    const month = entry.published.slice(0, 7);
-
-                    (groups[month] ??= []).push(entry);
-
-                    return groups;
-                },
-                {} as Record<string, typeof entries>,
-            ),
-        );
-    }
-
-    const sortedEntries = $derived(sortEntries(entries));
-
-    const filteredEntries = $derived(
-        sortedEntries.filter(
-            (entry) => matchesSearchQuery(entry) && matchesSelectedTags(entry),
-        ),
-    );
-
-    const groups = $derived(groupByMonth(filteredEntries));
+        return acc;
+    }, {});
 </script>
 
 <section>
-    <Breadcrumbs />
-
-    <header>
-        <h1>Blog Portal</h1>
-
-        <p>
-            This is a page where you can find all of my blog entries.<br />
-            Unlike <a href="/docs">documents</a>, this section contains more
-            subjective and personal topics.
-        </p>
-    </header>
-</section>
-
-<section id="search">
-    <h1>Search Options</h1>
-
-    <div class="search-bar">
-        <input
-            type="text"
-            placeholder="Search for a blog entry..."
-            bind:value={searchQuery}
-        />
-    </div>
-
-    <p>You can narrow down the searches by providing one or more tags:</p>
-
-    <div class="tag-bar">
-        {#each availableTags as tag}
-            <button
-                class:active={searchTags.includes(tag)}
-                class="tag"
-                onclick={() => {
-                    if (searchTags.includes(tag)) {
-                        searchTags = searchTags.filter((x) => x !== tag);
-                    } else {
-                        searchTags = [...searchTags, tag];
-                    }
-                }}
-            >
-                {"#"}<span class="tagname {tag}">{tag}</span>
-            </button>
-        {/each}
-    </div>
+    <Meta {metadata} />
 
     <p>
-        Currently sorting by: <button
-            class="{sortingOrder} adaptive-text-shadow"
-            onclick={() =>
-                (sortingOrder =
-                    sortingOrder === "ascending" ? "descending" : "ascending")}
-            >{sortingOrder} order</button
-        > <span class="dim">(click to change)</span>
-    </p>
-</section>
-
-<section>
-    <p>
-        <b>Found {sortedEntries.length} blog entries.</b>
+        <b
+            >hey there! this is a page where you can find all of my blog
+            entries.</b
+        ><br />
+        unlike my other <Ia href="/docs">documents</Ia>, this section contains
+        <b>more subjective and personal topics</b>.
     </p>
 
-    {#each groups as group}
-        <h1>
-            {new Date(group[0].published).toLocaleString("en-US", {
-                timeZone: "Asia/Seoul",
-                month: "long",
-                year: "numeric",
-            })}
-        </h1>
+    <details class="collapsible">
+        <summary>click here to show tag information!</summary>
 
-        {#each group as blog}
+        <section class="content">
+            <p>
+                <b>each and every blog entry has an unique set of tags</b>
+                so that you know what to expect. everyone likes categorization!
+            </p>
+
+            <ul>
+                <li>
+                    <span class="tag"
+                        >#<span class="personal">personal</span></span
+                    >
+                    - anything that directly relates to me as a whole.
+                </li>
+                <li>
+                    <span class="tag"
+                        >#<span class="website">website</span></span
+                    > - anything that is related to the website.
+                </li>
+                <li>
+                    <span class="tag"
+                        >#<span class="article">article</span></span
+                    > - ""formal yapping"", as if i was writing a real article.
+                </li>
+            </ul>
+        </section>
+    </details>
+
+    {#each Object.entries(entriesByYear) as [year, entries]}
+        <h1>{year}</h1>
+
+        <hr />
+
+        {#each Object.entries(entries) as [slug, entry]}
             <div>
-                <h2>
-                    <Ia href={`/blog/${blog.slug}`} class="keep-color">
-                        {blog.title}
-                    </Ia>
-                </h2>
+                <h2><Ia href={"/blog/" + slug}>{entry.title}</Ia></h2>
 
                 <p>
-                    {#if blog.description}
-                        {blog.description}
+                    {#if entry.description}
+                        {entry.description}
                     {:else}
-                        <i>No description provided.</i>
-                    {/if}<br />
-                    <span class="dim">
-                        <b
-                            >{new Date(blog.published).toLocaleString("en-US", {
-                                timeZone: "Asia/Seoul",
-                                dateStyle: "long",
-                            })}</b
-                        >
-                    </span>
-
-                    •
-
-                    {#if !blog.tags}
-                        <i>No tags provided.</i>
-                    {:else}
-                        {#each blog.tags as tag}
-                            <span class="tag active">
-                                {"#"}<span class={`tagname ${tag}`}>
-                                    {tag}
-                                </span>{" "}
-                            </span>
-                        {/each}
+                        <i>no description has been provided.</i>
                     {/if}
+                </p>
+
+                <p>
+                    <span class="date dim">
+                        {entry.lastUpdated}
+                    </span>
+                    ⬩
+                    {#each entry.tags as tag}
+                        <span class="tag">#<span class={tag}>{tag}</span></span
+                        >{" "}
+                    {/each}
                 </p>
             </div>
         {/each}
@@ -187,78 +97,56 @@
 </section>
 
 <style lang="css">
-    .tag {
-        color: #555;
+    .entries {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 2em;
     }
 
-    .tag,
-    .tag .tagname {
+    .entries :global(.-ba) {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+
+        gap: 0.25rem;
+        background: black;
+        border: 0.1rem solid var(--purple);
+        border-radius: 0.25rem;
+        padding: 1.5rem;
+
         transition: 0.2s ease;
     }
 
-    .tag.active .tagname {
-        font-weight: 500;
+    .entries :global(.-ba:hover) {
+        background: rgb(15, 0, 33);
 
-        text-shadow: 0 0 20px
-            oklch(from currentColor calc(l * 0.7) calc(c * 2) calc(h + 10));
-    }
-
-    .tag.active .tagname.important {
-        color: var(--red);
-    }
-    .tag.active .tagname.serious {
-        color: rgb(255, 120, 176);
+        box-shadow:
+            0 0 1rem rgba(100, 0, 255, 0.5),
+            inset 0 0 1rem rgba(100, 0, 255, 0.5);
     }
 
-    .tag.active .tagname.announcement {
-        color: var(--cyan);
+    .tag {
+        color: #444;
     }
 
-    .tag.active .tagname.blog {
-        color: rgb(136, 120, 255);
+    .personal {
+        color: var(--bright-red);
     }
-    .tag.active .tagname.monthly-recap {
+
+    .website {
         color: var(--bright-yellow);
     }
-    .tag.active .tagname.core {
+
+    .article {
         color: var(--bright-green);
     }
-    .tag.active .tagname.core-api {
-        color: var(--bright-orange);
-    }
-    .tag.active .tagname.personal {
-        color: var(--bright-purple);
-    }
-
-    #search {
-        border-top: 2px solid #555;
-        border-bottom: 2px solid #555;
-        background: #121212;
-    }
-
-    .tag-bar {
+    .entries :global(.-ba .heading) {
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
-        gap: 1em;
-    }
-
-    .search-bar {
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        justify-content: center;
-    }
-
-    .search-bar input[type="text"] {
-        width: 1000px;
-    }
-
-    #search button.ascending {
-        color: var(--green);
-    }
-
-    #search button.descending {
-        color: var(--orange);
+        align-items: center;
+        justify-content: space-between;
     }
 </style>

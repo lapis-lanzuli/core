@@ -8,16 +8,16 @@
     );
 
     const messages = [
-        "You found the Easter egg.",
-        "You found the Easter egg inside the Easter egg.",
-        "You found the Easter egg inside the Easter egg inside the Easter egg. Aren't you getting tired?",
-        "You found the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg. Why are you still doing this?",
-        "You found the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg.<br> There are other things on this website, you know...",
-        "You found the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg. I don't think there's anything else here.",
-        "You found the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg. There is nothing else.",
-        "You found the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg. I'm serious.",
-        "You found the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg. <b>STOP.</b>",
-        "You found the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg inside the Easter egg.<br>Congratulations. You have successfully reached the tenth layer of egg. Now please go look at anything other than this.",
+        "you found the easter egg.",
+        "you found the easter egg inside the easter egg.",
+        "you found the easter egg inside the easter egg inside the easter egg. aren't you getting tired?",
+        "you found the easter egg inside the easter egg inside the easter egg inside the easter egg. why are you still doing this",
+        "you found the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg.<br> there are other things on this website, you know...",
+        "you found the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg. i don't think there's anything else here.",
+        "you found the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg. there is nothing else.",
+        "you found the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg. i'm serious.",
+        "you found the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg. <b>STOP.</b>",
+        "you found the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg inside the easter egg.<br>congratulations. now please go look at literally ANYTHING other than this.</b>",
     ];
 
     const message = $derived(messages[Math.min(depth, messages.length) - 1]);
@@ -27,8 +27,7 @@
 
 <section>
     {#if exhausted}
-        <p>No more eggs.</p>
-        <p>We're not doing this again.</p>
+        <p>no more eggs.</p>
     {:else}
         <p>{@html message}</p>
     {/if}

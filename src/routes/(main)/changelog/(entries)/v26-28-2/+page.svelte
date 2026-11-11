@@ -1,15 +1,14 @@
 <script lang="ts">
-    export const metadata = {
-        published: new Date("2026-08-20T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.28.2</h2>
-
-    <p class="dim">
-        Release date: <b>August 20th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-28-2"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
@@ -19,7 +18,7 @@
         <li>
             <span class="col bright green">+</span>
             Added the
-            <a href="/conventions/versioning">versioning conventions</a> page.
+            <Ia href="/conventions/versioning">versioning conventions</Ia> page.
         </li>
         <li>
             <span class="col bright yellow">~</span>
@@ -27,7 +26,7 @@
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Improved design of the <a href="/contact">contact</a> page.
+            Improved design of the <Ia href="/contact">contact</Ia> page.
         </li>
         <li>
             <span class="col bright yellow">~</span>
@@ -36,9 +35,9 @@
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Split the <a href="/about">about</a> page into dedicated
-            <a href="/contact">contact methods</a>
-            and <a href="/domains">domain information</a> pages.
+            Split the <Ia href="/about">about</Ia> page into dedicated
+            <Ia href="/contact">contact methods</Ia>
+            and <Ia href="/domains">domain information</Ia> pages.
         </li>
     </ul>
 
@@ -46,15 +45,15 @@
 
     <ul>
         <li>
-            <a href="/blog">Blog</a>: <code>/docs/blog</code> ->
+            <Ia href="/blog">Blog</Ia>: <code>/docs/blog</code> ->
             <code>/blog</code>
         </li>
         <li>
-            <a href="/legal/privacy">Privacy Policy</a>:
+            <Ia href="/legal/privacy">Privacy Policy</Ia>:
             <code>/legal/privacy-policy</code> -> <code>/legal/privacy</code>
         </li>
         <li>
-            <a href="/legal/terms">Terms Of Service</a>:
+            <Ia href="/legal/terms">Terms Of Service</Ia>:
             <code>/legal/terms-of-service</code> -> <code>/legal/terms</code>
         </li>
     </ul>

@@ -3,7 +3,7 @@
     import shittyDrawing from "../assets/image1.png";
 
     import EditorsNote from "../EditorsNote.svelte";
-    import DocumentNavigation from "$lib/components/Navigation/DocumentNavigation.svelte";
+    import DocumentNavigation from "#lib/components/Navigation/DocumentNavigation.svelte";
 </script>
 
 <section>

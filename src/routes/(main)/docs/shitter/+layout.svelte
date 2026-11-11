@@ -1,13 +1,9 @@
 <script lang="ts">
-    import Sidebar from "$lib/components/Layouts/Sidebar.svelte";
-    import { Ba, Ia } from "$lib/components/Links";
+    import Sidebar from "#lib/components/Layouts/Sidebar.svelte";
+    import { Ba, Ia } from "#lib/components/Links/index.js";
 
     let { children } = $props();
 </script>
-
-<svelte:head>
-    <title>Shitter Explained, For Real!!</title>
-</svelte:head>
 
 {#snippet sidebar()}
     <Ba href="/docs/shitter/intro">

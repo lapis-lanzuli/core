@@ -1,4 +1,4 @@
-allowBuilds:
-    esbuild: false
-onlyBuiltDependencies:
-    - esbuild
+overrides:
+    cookie@<0.7.0: ^0.7.0
+    glob@>=9.0.0 <=14.0.1: ^14.0.2
+    minimatch@<11.0.1: ^11.0.1

@@ -1,31 +1,24 @@
-<script>
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
-    import { getPageData } from "$lib/map";
+<script lang="ts">
+    import { Ia } from "#lib/components/Links/index.ts";
+    import Meta from "#lib/components/Meta.svelte";
+    import type { LzMetadata } from "#lib/metadata.ts";
+
+    export const metadata: LzMetadata = {
+        title: "tools",
+    };
 </script>
 
 <section>
-    <Breadcrumbs />
+    <Meta {metadata} />
 
-    <header>
-        <h1>Tools Portal</h1>
-
-        <p>
-            Hello there! This is a page where you can find all of my tools.<br
-            />
-            <i>Click one of the links below to warp into that page!</i>
-        </p>
-    </header>
+    <p>this is a page where you can find all of my tools.</p>
 
     <ul>
         <li>
-            <a href="/tools/manual-bpm-checker">Manual BPM Checker</a> - {getPageData(
-                "/tools/manual-bpm-checker",
-            )?.description}
+            <Ia href="/tools/bpm-checker">BPM Checker</Ia>
         </li>
         <li>
-            <a href="/tools/number-formatter">Number Formatter</a> - {getPageData(
-                "/tools/number-formatter",
-            )?.description}
+            <Ia href="/tools/number-formatter">Number Formatter</Ia>
         </li>
     </ul>
 </section>

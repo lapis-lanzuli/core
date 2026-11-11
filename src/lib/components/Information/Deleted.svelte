@@ -1,9 +1,15 @@
-<blockquote class="error">
-    <b class="col bright red">
-        A section used to be here, but it has unfortunately been deleted.
-    </b><br /><br />
+<script>
+    import WarnRed from "../IconBlocks/WarnRed.svelte";
+</script>
 
-    While we try our best to preserve older documents and content, this section
-    had to be deleted due to various reasons. We apologize for any inconvenience
-    this may have caused.
+<blockquote class="error">
+    <p>
+        <WarnRed />
+    </p>
+
+    <p>
+        <b class="col bright red">
+            a section used to be here, but it has been deleted!
+        </b>
+    </p>
 </blockquote>

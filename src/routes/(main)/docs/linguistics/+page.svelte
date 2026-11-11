@@ -1,11 +1,4 @@
-<script>
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
-    import { getPageData } from "$lib/map";
-</script>
-
 <section>
-    <Breadcrumbs />
-
     <header>
         <h1>Linguistics</h1>
 
@@ -14,9 +7,7 @@
 
     <ul>
         <li>
-            <a href="/docs/linguistics/english">English</a> - {getPageData(
-                "/docs/linguistics/english",
-            )?.description}
+            <a href="/docs/linguistics/english">English</a>
         </li>
     </ul>
 </section>

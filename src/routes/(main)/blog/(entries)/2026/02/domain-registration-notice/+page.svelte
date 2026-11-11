@@ -1,23 +1,10 @@
-<script lang="ts" module>
-    import BlogBreadcrumbs from "$lib/components/Navigation/BlogBreadcrumbs.svelte";
-
-    export const metadata = {
-        title: "Domain Registration Notice",
-        tags: ["important", "announcement", "core"],
-        published: new Date("2026-02-07T00:00:00+09:00"),
-    };
+<script lang="ts">
+    import Meta from "#lib/components/Meta.svelte";
+    import { blogMetadata } from "../../../metadata";
 </script>
 
-<svelte:head>
-    <title>{metadata.title}</title>
-
-    <meta name="tags" content={metadata.tags.join(", ")} />
-</svelte:head>
-
 <section>
-    <BlogBreadcrumbs />
-
-    <h1>Domain Registration Notice</h1>
+    <Meta metadata={blogMetadata["2026/02/domain-registration-notice"]} />
 
     <h2>February 07th</h2>
 

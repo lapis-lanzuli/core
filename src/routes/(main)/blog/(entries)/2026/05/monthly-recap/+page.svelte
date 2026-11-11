@@ -1,29 +1,14 @@
-<script lang="ts" module>
-    export const metadata = {
-        title: "Monthly Recap | May 2026",
-        description: "A monthly recap for May 2026",
-        tags: ["blog", "monthly-recap", "core"],
-        published: new Date("2026-05-30T00:00:00+09:00"),
-    };
-</script>
-
 <script lang="ts">
     import oldImage from "./assets/old.png";
     import newImage from "./assets/new.png";
-    import Deleted from "$lib/components/Information/Deleted.svelte";
-    import BlogBreadcrumbs from "$lib/components/Navigation/BlogBreadcrumbs.svelte";
+    import Deleted from "#lib/components/Information/Deleted.svelte";
+
+    import Meta from "#lib/components/Meta.svelte";
+    import { blogMetadata } from "../../metadata";
 </script>
 
-<svelte:head>
-    <title>{metadata.title}</title>
-
-    <meta name="description" content={metadata.description} />
-
-    <meta name="tags" content={metadata.tags.join(", ")} />
-</svelte:head>
-
 <section>
-    <BlogBreadcrumbs />
+    <Meta metadata={blogMetadata["2026/05/monthly-recap"]} />
 
     <h1>Monthly Recap | May 2026</h1>
 

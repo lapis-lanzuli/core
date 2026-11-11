@@ -1,19 +1,29 @@
 <script lang="ts">
+    import Note from "../IconBlocks/Note.svelte";
+    import { Ia } from "../Links";
+
     let { links }: { links: string[] } = $props();
 
     let overflow = $derived(links.length > 3 || links.join("").length >= 100);
 </script>
 
 <blockquote>
-    <b>Redirects Information</b><br />
+    <p>
+        <Note />
+    </p>
+
     {#if !overflow}
-        This page can also be accessed through
-        {#each links as link, i}
-            <code>{link}</code
-            >{#if i < links.length - 2}{", "}{/if}{#if i === links.length - 2}{" and "}{/if}{#if i === links.length - 1}{"."}{/if}
-        {/each}
+        <p>
+            this page can also be accessed through
+            {#each links as link, i}
+                <code>{link}</code
+                >{#if i < links.length - 2}{", "}{/if}{#if i === links.length - 2}{" and "}{/if}{#if i === links.length - 1}{"."}{/if}
+            {/each}
+        </p>
     {:else}
-        This page can also be accessed through {links.length} redirect sources.
+        <p>
+            this page can also be accessed through {links.length} redirect sources.
+        </p>
 
         <details>
             <summary>Show all sources</summary>
@@ -21,9 +31,9 @@
             <ul>
                 {#each links as link, _}
                     <li>
-                        <a href={link}>
+                        <Ia href={link}>
                             <code>{link}</code>
-                        </a>
+                        </Ia>
                     </li>
                 {/each}
             </ul>

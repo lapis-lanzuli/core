@@ -1,11 +1,4 @@
-<script>
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
-    import { getPageData } from "$lib/map";
-</script>
-
 <section>
-    <Breadcrumbs />
-
     <h1>Conventions</h1>
 
     <p>
@@ -15,14 +8,10 @@
 
     <ul>
         <li>
-            <a href="/conventions/changelog">Changelog Conventions</a> - {getPageData(
-                "/conventions/changelog",
-            )?.description}
+            <a href="/conventions/changelog">Changelog Conventions</a>
         </li>
         <li>
-            <a href="/conventions/versioning">Versioning Conventions</a> - {getPageData(
-                "/conventions/versioning",
-            )?.description}
+            <a href="/conventions/versioning">Versioning Conventions</a>
         </li>
     </ul>
 </section>

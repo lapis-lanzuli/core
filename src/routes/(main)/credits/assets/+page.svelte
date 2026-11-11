@@ -1,11 +1,8 @@
 <script>
-    import { Ba, Ia } from "$lib/components/Links";
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
+    import { Ba, Ia } from "#lib/components/Links/index.js";
 </script>
 
 <section>
-    <Breadcrumbs />
-
     <h1>Icon Credits</h1>
 
     <p>

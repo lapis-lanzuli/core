@@ -17,3 +17,9 @@ export function pickRandom<const T>(array: readonly T[]): T {
 export function shuffle<T>(array: T[]): T[] {
     return [...array].sort(() => Math.random() - 0.5);
 }
+
+export function formatDateTime(date: Date, timezone: string = "Asia/Seoul") {
+    return date.toLocaleDateString("en-CA", {
+        timeZone: timezone,
+    });
+}

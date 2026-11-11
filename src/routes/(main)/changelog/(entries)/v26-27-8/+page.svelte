@@ -1,27 +1,26 @@
-<script lang="ts" module>
-    export const metadata = {
-        published: new Date("2026-08-12T00:00:00+09:00"),
-    };
+<script lang="ts">
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h1>Minor update v26.27.8</h1>
-
-    <p class="dim">
-        Release date: <b>August 12th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-27-8"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
             <span class="col bright green">+</span>
             Added more easter eggs, and their hints in the
-            <a href="/profile#trivia">trivia</a> section.
+            <Ia href="/profile#trivia">trivia</Ia> section.
         </li>
         <li>
             <span class="col bright green">+</span>
-            Added the <a href="/arg">ARG</a> section, appropriate metadata, and
+            Added the <Ia href="/arg">ARG</Ia> section, appropriate metadata, and
             links within the
-            <a href="/projects">projects</a> page.
+            <Ia href="/projects">projects</Ia> page.
         </li>
         <li>
             <span class="col bright yellow">~</span>

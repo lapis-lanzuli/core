@@ -1,15 +1,23 @@
-<script>
-    import ContentWarning from "$lib/components/Information/ContentWarning.svelte";
-    import DocumentNavigation from "$lib/components/Navigation/DocumentNavigation.svelte";
+<script lang="ts">
+    import ContentWarning from "#lib/components/Information/ContentWarning.svelte";
+    import Meta from "#lib/components/Meta.svelte";
+    import DocumentNavigation from "#lib/components/Navigation/DocumentNavigation.svelte";
+    import type { LzMetadata } from "#lib/metadata.ts";
+
+    export const metadata: LzMetadata = {
+        title: "Shitter Explained, For Real!!",
+        description:
+            "Over the past few years, a Discord user known by his many online aliases as Pl4y3r, Tobuchou General and much more, has been psychopathically tracking and spying on us, even going so far as to fake his death for dramatic effect and more.",
+        lastUpdated: "2026-11-10",
+        version: "v4.1",
+    };
 </script>
 
 <section>
-    <h1 style="font-size: 3em">Shitter Explained, For Real!!</h1>
-
-    <blockquote><b>Last updated on September 5th, 2026</b> - v4.0</blockquote>
+    <Meta {metadata} />
 
     <ContentWarning>
-        This document, as well as all of the other documents listed in the
+        this document, as well as all of the other documents listed in the
         navigation panel contain intense profanity and discuss themes related to
         suicidal thoughts and intentions.
     </ContentWarning>

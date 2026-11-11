@@ -1,11 +1,4 @@
-<script>
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
-    import { getPageData } from "$lib/map";
-</script>
-
 <section>
-    <Breadcrumbs />
-
     <header>
         <h1>English</h1>
 

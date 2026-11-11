@@ -1,8 +1,8 @@
-export namespace LStorage {
+export namespace LzStorage {
     export function storage(): Storage {
         if (typeof window === "undefined") {
             throw new Error(
-                "localStorage is unavailable during SSR.\nConsider wrapping it within an onMount() method.",
+                "localStorage is unavailable during SSR!!!\nConsider wrapping it within an onMount() method.",
             );
         }
 
@@ -19,7 +19,7 @@ export namespace LStorage {
     }
 
     export function register(key: string, value: string): void {
-        const storage = LStorage.storage();
+        const storage = LzStorage.storage();
 
         if (storage.getItem(key) === null) {
             storage.setItem(key, value);

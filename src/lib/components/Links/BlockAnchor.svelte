@@ -17,7 +17,9 @@
 </script>
 
 <a
-    class={`-ba -block-anchor ${className ?? ""}`}
+    class={external
+        ? `-ba -block-anchor external ${className ?? ""}`
+        : `-ba -block-anchor  ${className ?? ""}`}
     {href}
     {...rest}
     target={external ? "_blank" : undefined}

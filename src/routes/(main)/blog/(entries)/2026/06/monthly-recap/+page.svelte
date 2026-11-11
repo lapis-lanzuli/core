@@ -1,33 +1,17 @@
-<script lang="ts" module>
-    export const metadata = {
-        title: "Monthly Recap | June 2026",
-        description: "A monthly recap for June 2026",
-        tags: ["blog", "monthly-recap", "core"],
-        published: new Date("2026-06-30T00:00:00+09:00"),
-    };
-</script>
-
 <script lang="ts">
     import footerOld from "./assets/footer-old.png";
     import footerNew from "./assets/footer-new.png";
 
     import panelOld from "./assets/panel-old.png";
     import panelNew from "./assets/panel-new.png";
-    import BlogBreadcrumbs from "$lib/components/Navigation/BlogBreadcrumbs.svelte";
+
+    import { Ia } from "#lib/components/Links/index.ts";
+    import Meta from "#lib/components/Meta.svelte";
+    import { blogMetadata } from "../../../metadata";
 </script>
 
-<svelte:head>
-    <title>{metadata.title}</title>
-
-    <meta name="description" content={metadata.description} />
-
-    <meta name="tags" content={metadata.tags.join(", ")} />
-</svelte:head>
-
 <section>
-    <BlogBreadcrumbs />
-
-    <h1>Monthly Recap | June 2026</h1>
+    <Meta metadata={blogMetadata["2026/06/monthly-recap"]} />
 
     <p>
         Hello! It's already been a month, huh?<br />
@@ -44,17 +28,16 @@
             released!</b
         >
         For full details, check out the
-        <a href="/projects/core/changelog#v26-24-0">changelog</a>. We believe
-        this update marks a strong step toward improving the overall user
-        experience.
+        <Ia href="/changelog#v26-24-0">changelog</Ia>. I believe this update
+        marks a strong step toward improving the overall user experience.
 
         <br /><br />
 
         <b
-            >That said, since this update is rather experimental, we'd like to
+            >That said, since this update is rather experimental, i'd like to
             hear more from you!</b
         >
-        Feel free to <a href="#connections">get in touch</a> for any feedback or questions.
+        Feel free to <Ia href="/contact">get in touch</Ia> for any feedback or questions.
     </p>
 
     <div class="image-grid">
@@ -84,7 +67,7 @@
 
         <b
             >it's highly recommended that you refer to
-            <a href="/docs/blog/2026/07/svelte-migration">this article</a> instead.
+            <Ia href="/blog/2026/07/svelte-migration">this article</Ia> instead.
         </b>
     </blockquote>
 
@@ -93,7 +76,7 @@
     <p>
         After some consideration,
         <b>
-            we've decided to migrate the entire project from our outdated custom
+            i've decided to migrate the entire project from our outdated custom
             routing system to
             <span style="color: rgb(255, 54, 36)">SvelteKit</span>!
         </b>
@@ -106,9 +89,9 @@
         As the site continued to grow, maintaining the codebase became increasingly
         challenging. Our previous custom Vite-based setup had become outdated and
         difficult to work with.<br />
-        This is when one of my <a href="/credits/contributors">team members</a> recommended
-        SvelteKit. After trying it out, I realized it was a much better fit for what
-        I wanted to achieve with the project.
+        This is when one of my <Ia href="/credits/contributors">team members</Ia
+        > recommended SvelteKit. After trying it out, I realized it was a much better
+        fit for what I wanted to achieve with the project.
     </p>
 
     <h3>What should I expect from the transition?</h3>
@@ -116,16 +99,13 @@
     <p>
         Unfortunately, since this is a significant transition,
         <b>
-            we won't be making any new changes to the existing project until the
+            I won't be making any new changes to the existing project until the
             migration is complete.
         </b>
-        <i>This will likely be the last version we release for a while.</i>
+        <i>This will likely be the last version I release for a while.</i>
         <b>
-            We will also not be collecting any analytics during the transition.
+            I will also not be collecting any analytics during the transition.
         </b>
-
-        <br /><br />
-        We appreciate your understanding in the meantime.
     </p>
 
     <h3>Will the website change in any way?</h3>

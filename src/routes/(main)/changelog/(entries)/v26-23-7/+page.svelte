@@ -1,15 +1,14 @@
 <script lang="ts">
-    export const metadata = {
-        published: new Date("2026-06-14T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.23.7</h2>
-
-    <p class="dim">
-        Release date: <b>June 14th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-23-7"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <p>A bit of an internal update today.</p>
 

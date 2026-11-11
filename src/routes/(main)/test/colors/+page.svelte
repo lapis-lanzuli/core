@@ -1,10 +1,9 @@
 <section id="intro">
     <h1>Color Palette</h1>
 
-    <h2>Text Colors</h2>
-
     <p>
-        <b>The text colors were heavily inspired by terminal text colors.</b>
+        these were like. heavily inspired by terminal colors. they look pretty
+        cool hehe
     </p>
 
     <div class="colors">

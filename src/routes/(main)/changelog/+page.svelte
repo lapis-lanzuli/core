@@ -1,7 +1,21 @@
 <script lang="ts">
-    import { Ia } from "$lib/components/Links";
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
-    import entries from "./(entries)/entries.json";
+    import Meta from "#lib/components/Meta.svelte";
+    import Warn from "#lib/components/IconBlocks/Warn.svelte";
+    import { Ia } from "#lib/components/Links/index.js";
+    import type { LzMetadata } from "#lib/metadata.js";
+    import { changelogMetadata } from "./(entries)/metadata";
+
+    export const metadata: LzMetadata = {
+        title: "changelog",
+        description: "a list of all changes and updates made to the website.",
+    };
+
+    const entries = Object.entries(changelogMetadata).map(
+        ([version, metadata]) => ({
+            version,
+            ...metadata,
+        }),
+    );
 
     const map = new Map<string, typeof entries>();
 
@@ -21,7 +35,7 @@
 
     let searchQuery = $state("");
     let status = $state(
-        "Search a version name, and warp into an entry by pressing Enter!",
+        "search a version name, and warp into an entry by pressing <kbd>Enter</kbd>!",
     );
 
     function normalize(query: string) {
@@ -54,7 +68,7 @@
         );
 
         if (!entry) {
-            status = `Sorry, we couldn't find a version named ${searchQuery}. Please try again!`;
+            status = `sorry, i couldn't find a version named ${searchQuery}. please try again!`;
             return;
         }
 
@@ -63,36 +77,42 @@
 </script>
 
 <section>
-    <Breadcrumbs />
-
-    <h1>Changelog</h1>
+    <Meta {metadata} />
 
     <p>
-        This page contains a list of all changes and updates made to the
-        website.<br />
-        <b>You can use the search bar below to search for a version.</b>
+        <b>
+            this page just contains a list of all changes and updates made to
+            the website.
+        </b>
+        <br />
+
+        i made this because i like seeing how my website has evolved over time.
     </p>
 
     <p>
-        For the changelog conventions, please refer to <a
-            href="/conventions/changelog">this article</a
-        >.<br />
-        All versions of <code>core</code> follow the
-        <a href="/conventions/versioning">versioning conventions</a>.
+        for the changelog conventions, please refer to
+        <Ia href="/changelog/conventions">this article</Ia>!
     </p>
 
     <blockquote class="warning">
-        <b class="col bright yellow">Not all changes require a new changelog!</b
-        ><br />
-        If a change was very small, urgent, or not assigned a version tag, it won't
-        show up here.
+        <p>
+            <Warn />
+        </p>
+
+        <p>
+            <b class="col bright yellow"
+                >not all updates come with a new changelog!</b
+            ><br />
+            if an update was small, urgent, or not assigned a version tag, it won't
+            show up here.
+        </p>
     </blockquote>
 </section>
 
 <section id="entries">
-    <div class="search-options enable-spacing">
+    <div class="search-options enable-layout">
         <p>
-            {status}
+            {@html status}
         </p>
 
         <div class="search-bar">
@@ -109,37 +129,24 @@
     </div>
 
     <p>
-        <b>Found {entries.length} changelog entries.</b>
+        <b>found {entries.length} changelog entries!</b> yes, this list is automatically
+        generated. how cool!
     </p>
 
     {#each groups as group}
-        <h1>Version group {group.id}</h1>
+        <h1>{group.id}</h1>
 
         <ul>
             {#each group.entries as entry}
                 <li>
                     <h2>
-                        <Ia
-                            href="/projects/core/changelog/{entry.version}"
-                            class="keep-color"
-                        >
-                            {entry.version}
-                        </Ia>{#if entry.title}: {entry.title}{/if}<br />
+                        <Ia href="/changelog/{entry.version}">
+                            {entry.title}
+                        </Ia>
                     </h2>
 
-                    <p>
-                        <b class="dim"
-                            >{new Date(entry.published).toLocaleString(
-                                "en-US",
-                                {
-                                    timeZone: "Asia/Seoul",
-                                    dateStyle: "long",
-                                },
-                            )}</b
-                        >
-                        {#if entry.commit}
-                            • <Ia href={entry.commit} external>commit</Ia>
-                        {/if}
+                    <p class="dim">
+                        published on <b>{entry.lastUpdated}</b>
                     </p>
                 </li>
             {/each}
@@ -147,12 +154,12 @@
     {/each}
 
     <p class="dim">
-        Please note that versions prior to <code>v26.23.3</code> aren't listed here,
-        as they were simply not documented.
+        versions prior to <code>v26.23.3</code> aren't listed here, as they were simply
+        not documented.
     </p>
 </section>
 
-<style lang="css">
+<style>
     .search-options {
         margin: 2em auto;
     }

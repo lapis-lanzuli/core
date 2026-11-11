@@ -1,15 +1,14 @@
 <script lang="ts">
-    export const metadata = {
-        published: new Date("2026-06-12T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.23.5</h2>
-
-    <p class="dim">
-        Release date: <b>June 12th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-23-5"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <p>
         <b>This update is part of the navigation UI/UX overhaul.</b>
@@ -28,7 +27,7 @@
         <li>
             <span class="col bright green">+</span>
             Added a link to the <code>core-api</code> project's changelog within
-            <a href="/projects"> the projects page </a>.
+            <Ia href="/projects">the projects page</Ia>.
         </li>
 
         <li>
@@ -52,14 +51,14 @@
 
         <li>
             <span class="col bright yellow">~</span>
-            Updated <a href="/privacy-policy">the privacy policy</a>
+            Updated <Ia href="/privacy-policy">the privacy policy</Ia>
             to <code>v2.3</code> in order to match so it matches the new changes.
         </li>
 
         <li>
             <span class="col bright yellow">~</span>
             Updated the logic of the script loaded by
-            <a href="/privacy-policy">the privacy policy</a>
+            <Ia href="/privacy-policy">the privacy policy</Ia>
             to hide the panel when you make a choice via the button.
         </li>
     </ul>

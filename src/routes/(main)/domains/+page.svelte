@@ -1,19 +1,24 @@
-<script>
-    import { Ia } from "$lib/components/Links";
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
+<script lang="ts">
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import type { LzMetadata } from "#lib/metadata.js";
+
+    export const metadata: LzMetadata = {
+        title: "domains",
+        description:
+            "information about which domains are actually mine and which are not.",
+    };
 </script>
 
 <section>
-    <Breadcrumbs />
-
-    <h1>Domains</h1>
+    <Meta {metadata} />
 
     <h2>Registered Domains</h2>
 
     <p>
         <b>
-            As of now, the only domain(s) I have purchased that's related to
-            this website are:
+            as of now, the only domains i have purchased that's related to this
+            website are:
         </b>
     </p>
 
@@ -28,23 +33,21 @@
     </ul>
 
     <p>
-        <b
-            >Subdomains of the websites above, such as <code
-                ><i>api</i>.lanzoor.dev</code
-            > are indeed mine.</b
-        >
+        <b>
+            yes, subdomains of the websites above, such as <code
+                ><u>api</u>.<span class="dim">lanzoor.dev</span></code
+            > are indeed mine.
+        </b>
     </p>
 
     <p>
-        If you see ANY other domain that's not on the list above,
-        <i class="col bright red"
-            ><b>it's not affiliated with me, nor Lanzaforge.</b></i
-        >
+        if you see ANY other domain that's not on the list above,
+        <i class="col bright red"><b>it's not affiliated with me!</b></i>
     </p>
 
     <p class="dim">
-        Also... I do not own <code>lanzoor.com</code>. It's probably worth
-        mentioning that it didn't exist before I bought
+        also... i do not own <code>lanzoor.com</code>. it's probably worth
+        mentioning that it didn't exist until i bought
         <code>lanzoor.dev</code>.
     </p>
 
@@ -52,8 +55,9 @@
 
     <p>
         <b>
-            All of my domains are registered via
-            <Ia href="https://porkbun.com/" external>Porkbun</Ia>.
+            all of my domains are registered via
+            <Ia href="https://porkbun.com/" external>Porkbun</Ia>!
         </b>
+        good registrar tbh.
     </p>
 </section>

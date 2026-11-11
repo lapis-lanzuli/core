@@ -1,15 +1,14 @@
-<script lang="ts" module>
-    export const metadata = {
-        published: new Date("2026-08-06T00:00:00+09:00"),
-    };
+<script lang="ts">
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h1>Minor update v26.27.5</h1>
-
-    <p class="dim">
-        Release date: <b>August 6th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-27-5"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
@@ -28,18 +27,20 @@
         </li>
         <li>
             <span class="col bright green">+</span>
-            Added content to the <a href="/map">site map</a>.
+            Added content to the <Ia href="/map">site map</Ia>.
         </li>
         <li>
             <span class="col bright yellow">~</span>
             Improved the search features within the
-            <a href="/docs/blog">blog</a>
+            <Ia href="/blog">blog</Ia>
             and
-            <a href="/projects/core/changelog">changelog</a> pages.
+            <Ia href="/changelog">changelog</Ia> pages.
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Moved the <a href="/conventions/changelog">changelog conventions</a>
+            Moved the <Ia href="/conventions/changelog"
+                >changelog conventions</Ia
+            >
             page from
             <code>/projects/core/changelog/conventions</code>
             to
@@ -47,7 +48,7 @@
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Updated the <a href="/profile">profile</a> page.
+            Updated the <Ia href="/profile">profile</Ia> page.
         </li>
     </ul>
 </section>

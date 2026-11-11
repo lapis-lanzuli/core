@@ -1,18 +1,70 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&display=swap");
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/jetbrains-mono/Bold.woff2") format("woff2");
 
-.fira-code,
-.fira-code * {
-    font-family: "Fira Code", Consolas, monospace;
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/jetbrains-mono/BoldItalic.woff2") format("woff2");
+
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/jetbrains-mono/Light.woff2") format("woff2");
+
+    font-weight: light;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/jetbrains-mono/LightItalic.woff2") format("woff2");
+
+    font-weight: light;
+    font-style: italic;
 }
 
 .jetbrains-mono,
 .jetbrains-mono * {
     font-family: "JetBrains Mono", Consolas, monospace;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("/assets/fonts/noto-sans/Bold.ttf") format("truetype");
+
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("/assets/fonts/noto-sans/BoldItalic.ttf") format("truetype");
+
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("/assets/fonts/noto-sans/Regular.ttf") format("truetype");
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("/assets/fonts/noto-sans/Italic.ttf") format("truetype");
+
+    font-weight: normal;
+    font-style: italic;
 }
 
 .ipa,
@@ -24,24 +76,33 @@
     font-family: "Noto Sans", sans-serif;
 }
 
+@font-face {
+    font-family: "Noto Sans Mono";
+    src: url("/assets/fonts/noto-sans-mono/Bold.ttf") format("truetype");
+
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Noto Sans Mono";
+    src: url("/assets/fonts/noto-sans-mono/Regular.ttf") format("truetype");
+
+    font-weight: normal;
+    font-style: normal;
+}
+
 .noto-sans-mono,
 .noto-sans-mono * {
     font-family: "Noto Sans Mono", sans-serif;
 }
 
-.space-grotesk,
-.space-grotesk * {
-    font-family: "Space Grotesk", sans-serif;
-}
+@font-face {
+    font-family: "Sawarabi Gothic";
+    src: url("/assets/fonts/sawarabi-gothic/Regular.ttf") format("truetype");
 
-.geist,
-.geist * {
-    font-family: "Geist", sans-serif;
-}
-
-.inter,
-.inter * {
-    font-family: "Inter", sans-serif;
+    font-weight: normal;
+    font-style: normal;
 }
 
 .jp,
@@ -49,8 +110,4 @@
 .sawarabi-gothic,
 .sawarabi-gothic * {
     font-family: "Sawarabi Gothic", sans-serif;
-}
-
-.ko-serif {
-    font-family: "Noto Serif KR";
 }

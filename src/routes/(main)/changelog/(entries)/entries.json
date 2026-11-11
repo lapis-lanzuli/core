@@ -1,134 +1,130 @@
-[
-    {
-        "published": "2026-10-18T15:00:00.000Z",
-        "version": "v26-28-9"
+{
+    "v26-29-0": {
+        "title": "v26.29.0: initium novae erae",
+        "lastUpdated": "2026-11-11"
     },
-    {
-        "published": "2026-10-07T15:00:00.000Z",
-        "commit": "https://github.com/Lanzoor/core/commit/33f8959d280eab8b3190885965bcd905fcb5f139",
-        "version": "v26-28-8"
+    "v26-28-9": {
+        "title": "v26.28.9",
+        "lastUpdated": "2026-10-19"
     },
-    {
-        "published": "2026-10-06T15:00:00.000Z",
-        "commit": "https://github.com/Lanzoor/core/commit/70dfadf8e3084edfc45e85bd1220e286b9ef6ad9",
-        "version": "v26-28-7"
+    "v26-28-8": {
+        "title": "v26.28.8",
+        "lastUpdated": "2026-10-08"
     },
-    {
-        "published": "2026-09-26T15:00:00.000Z",
-        "commit": "https://github.com/Lanzoor/core/commit/405a4f38d1e2a71d6605f1d04b8fc160eedfc09b",
-        "version": "v26-28-6"
+    "v26-28-7": {
+        "title": "v26.28.7",
+        "lastUpdated": "2026-10-07"
     },
-    {
-        "published": "2026-09-20T15:00:00.000Z",
-        "version": "v26-28-5"
+    "v26-28-6": {
+        "title": "v26.28.6",
+        "lastUpdated": "2026-09-27"
     },
-    {
-        "published": "2026-09-09T15:00:00.000Z",
-        "version": "v26-28-4"
+    "v26-28-5": {
+        "title": "v26.28.5",
+        "lastUpdated": "2026-09-21"
     },
-    {
-        "published": "2026-09-04T15:00:00.000Z",
-        "version": "v26-28-3"
+    "v26-28-4": {
+        "title": "v26.28.4",
+        "lastUpdated": "2026-09-10"
     },
-    {
-        "published": "2026-08-19T15:00:00.000Z",
-        "version": "v26-28-2"
+    "v26-28-3": {
+        "title": "v26.28.3",
+        "lastUpdated": "2026-09-05"
     },
-    {
-        "published": "2026-08-13T15:00:00.000Z",
-        "version": "v26-28-1"
+    "v26-28-2": {
+        "title": "v26.28.2",
+        "lastUpdated": "2026-08-20"
     },
-    {
-        "title": "acta est fabula, plaudite.",
-        "published": "2026-08-12T15:00:00.000Z",
-        "version": "v26-28-0"
+    "v26-28-1": {
+        "title": "v26.28.1",
+        "lastUpdated": "2026-08-14"
     },
-    {
-        "published": "2026-08-11T15:00:00.000Z",
-        "version": "v26-27-8"
+    "v26-28-0": {
+        "title": "v26.28.0: acta est fabula, plaudite.",
+        "lastUpdated": "2026-08-20"
     },
-    {
-        "published": "2026-08-08T15:00:00.000Z",
-        "version": "v26-27-7"
+    "v26-27-8": {
+        "title": "v26.27.8",
+        "lastUpdated": "2026-08-12"
     },
-    {
-        "published": "2026-08-07T15:00:00.000Z",
-        "version": "v26-27-6"
+    "v26-27-7": {
+        "title": "v26.27.7",
+        "lastUpdated": "2026-08-09"
     },
-    {
-        "published": "2026-08-05T15:00:00.000Z",
-        "version": "v26-27-5"
+    "v26-27-6": {
+        "title": "v26.27.6",
+        "lastUpdated": "2026-08-08"
     },
-    {
-        "published": "2026-08-04T15:00:00.000Z",
-        "version": "v26-27-4"
+    "v26-27-5": {
+        "title": "v26.27.5",
+        "lastUpdated": "2026-08-06"
     },
-    {
-        "published": "2026-08-02T15:00:00.000Z",
-        "version": "v26-27-3"
+    "v26-27-4": {
+        "title": "v26.27.4",
+        "lastUpdated": "2026-08-05"
     },
-    {
-        "published": "2026-08-01T15:00:00.000Z",
-        "version": "v26-27-2"
+    "v26-27-3": {
+        "title": "v26.27.3",
+        "lastUpdated": "2026-08-03"
     },
-    {
-        "published": "2026-07-31T15:00:00.000Z",
-        "version": "v26-27-1"
+    "v26-27-2": {
+        "title": "v26.27.2",
+        "lastUpdated": "2026-08-02"
     },
-    {
-        "title": "Overly Overhauled Overlays",
-        "published": "2026-07-28T15:00:00.000Z",
-        "version": "v26-27-0"
+    "v26-27-1": {
+        "title": "v26.27.1",
+        "lastUpdated": "2026-08-01"
     },
-    {
-        "title": "The Legal Update",
-        "published": "2026-07-23T15:00:00.000Z",
-        "version": "v26-26-0"
+    "v26-27-0": {
+        "title": "v26.27.0: Overly Overhauled Overlays",
+        "lastUpdated": "2026-07-29"
     },
-    {
-        "title": "The Svelte Migration",
-        "published": "2026-07-14T15:00:00.000Z",
-        "version": "v26-25-0"
+    "v26-26-0": {
+        "title": "v26.26.0: The Legal Update",
+        "lastUpdated": "2026-07-24"
     },
-    {
-        "published": "2026-07-08T15:00:00.000Z",
-        "version": "v26-25-2147483648"
+    "v26-25-0": {
+        "title": "v26.25.0: The Svelte Migration",
+        "lastUpdated": "2026-07-15"
     },
-    {
-        "published": "2026-06-27T15:00:00.000Z",
-        "version": "v26-24-2147483647"
+    "v26-25-2147483648": {
+        "title": "v26.25.2147483648",
+        "lastUpdated": "2026-07-09"
     },
-    {
-        "title": "The Navigation Overhaul",
-        "published": "2026-06-18T15:00:00.000Z",
-        "version": "v26-24-0"
+    "v26-24-2147483647": {
+        "title": "v26.24.2147483647",
+        "lastUpdated": "2026-06-18"
     },
-    {
-        "published": "2026-06-15T15:00:00.000Z",
-        "version": "v26-23-9"
+    "v26-24-0": {
+        "title": "v26.24.0: The Navigation Overhaul",
+        "lastUpdated": "2026-06-18"
     },
-    {
-        "published": "2026-06-14T15:00:00.000Z",
-        "version": "v26-23-8"
+    "v26-23-9": {
+        "title": "v26.23.9",
+        "lastUpdated": "2026-06-16"
     },
-    {
-        "published": "2026-06-13T15:00:00.000Z",
-        "version": "v26-23-7"
+    "v26-23-8": {
+        "title": "v26.23.8",
+        "lastUpdated": "2026-06-15"
     },
-    {
-        "published": "2026-06-12T15:00:00.000Z",
-        "version": "v26-23-6"
+    "v26-23-7": {
+        "title": "v26.23.8",
+        "lastUpdated": "2026-06-15"
     },
-    {
-        "published": "2026-06-11T15:00:00.000Z",
-        "version": "v26-23-5"
+    "v26-23-6": {
+        "title": "v26.23.6",
+        "lastUpdated": "2026-06-13"
     },
-    {
-        "published": "2026-06-09T15:00:00.000Z",
-        "version": "v26-23-4"
+    "v26-23-5": {
+        "title": "v26.23.5",
+        "lastUpdated": "2026-06-12"
     },
-    {
-        "published": "2026-06-08T15:00:00.000Z",
-        "version": "v26-23-3"
+    "v26-23-4": {
+        "title": "v26.23.4",
+        "lastUpdated": "2026-06-10"
+    },
+    "v26-23-3": {
+        "title": "v26.23.3",
+        "lastUpdated": "2026-06-09"
     }
-]
+}

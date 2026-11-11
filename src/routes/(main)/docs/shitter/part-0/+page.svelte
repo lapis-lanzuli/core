@@ -1,5 +1,5 @@
 <script>
-    import DocumentNavigation from "$lib/components/Navigation/DocumentNavigation.svelte";
+    import DocumentNavigation from "#lib/components/Navigation/DocumentNavigation.svelte";
 </script>
 
 <section>

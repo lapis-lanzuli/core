@@ -1,15 +1,14 @@
 <script lang="ts">
-    export const metadata = {
-        published: new Date("2026-06-28T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.24.2147483647</h2>
-
-    <p class="dim">
-        Release date: <b>June 28th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-24-2147483647"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <p>
         <b>
@@ -17,9 +16,9 @@
             hence the name.
         </b>
         For more information, please check
-        <a href="/docs/blog/2026/06/monthly-recap.html#svelte">
+        <Ia href="/blog/2026/06/monthly-recap#svelte">
             the monthly recap for June
-        </a>.
+        </Ia>.
     </p>
 
     <ul>

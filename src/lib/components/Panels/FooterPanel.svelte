@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { formatDateTime } from "#lib";
+    import { LzMeta } from "#lib/metadata.ts";
     import { Ba, Ia } from "../Links";
 </script>
 
@@ -16,7 +18,6 @@
                 <a href="/projects">Projects</a>
                 <a href="/tools">Tools</a>
                 <Ia href="/projects/videos" external>Videos</Ia>
-                <a href="/projects/conlangs">Conlangs</a>
             </div>
             <div class="group">
                 <h2>Documents</h2>
@@ -29,39 +30,34 @@
                 <a href="/about">About</a>
                 <a href="/contact">Contact</a>
                 <a href="/changelog">Changelog</a>
+                <a href="/privacy-policy">Privacy Policy</a>
                 <a href="/credits">Credits</a>
-            </div>
-            <div class="group">
-                <h2>Legal</h2>
-                <a href="/legal">About</a>
-                <a href="/legal/privacy">Privacy Policy</a>
-                <a href="/legal/terms">Terms of Service</a>
             </div>
         </nav>
     </section>
 
-    <section class="enable-spacing" id="bottom">
-        <div class="enable-spacing">
+    <section class="enable-layout" id="bottom">
+        <div class="enable-layout">
             <h1 class="logo">
                 <span class="head">lanzoor</span>.<span class="tail">dev</span>
             </h1>
 
             <p>
-                A website by Lapis Lanzuli, including projects, showcases,
-                documents, and more!
+                a small website maintained by Lapis Lanzuli, including projects,
+                showcases, documents, and more!
             </p>
 
             <p class="dim">
-                <b>v26.28.9</b> | last updated @
-                <code title="GMT+9">October 19th, 2026</code>
-                |
-                <a href="/changelog/v26-28-9">view changelog</a>
+                <b>{LzMeta.version}</b> ⬩ last updated at
+                <b>{formatDateTime(LzMeta.lastUpdated)}</b>
+                ⬩
+                <Ia href={LzMeta.changelog}>view changelog</Ia>
             </p>
         </div>
 
         <hr />
 
-        <div id="footer" class="enable-spacing">
+        <div id="footer" class="enable-layout">
             <div id="connections">
                 <Ba href="https://www.discord.com" external>
                     <img
@@ -70,7 +66,7 @@
                     />
 
                     <span class="handle">
-                        @<span class="col bright purple">lanzoor</span>
+                        @<span class="col bright purple">lapis-lanzuli</span>
                     </span>
                 </Ba>
 
@@ -82,11 +78,11 @@
                     </span>
                 </Ba>
 
-                <Ba href="https://github.com/Lanzoor" external>
+                <Ba href="https://github.com/lapis-lanzuli" external>
                     <img src="/assets/icons/socials/github.svg" alt="GitHub" />
 
                     <span class="handle">
-                        <span class="col bright purple">Lanzoor</span>
+                        <span class="col bright purple">lapis-lanzuli</span>
                     </span>
                 </Ba>
 
@@ -119,10 +115,8 @@
             </div>
 
             <footer>
-                © 2026
-                <Ia href="https://lanzaforge.org" external>Lanzaforge</Ia> ⬩ Do not
-                redistribute.<br />
-                Made with <Ia
+                <b>© 2026 Lapis Lanzuli</b> ⬩ Do not redistribute.<br />
+                <a href="/credits">credits</a> ⬩ made with <Ia
                     href="https://svelte.dev/docs/kit/introduction"
                     external>SvelteKit</Ia
                 > and ♡
@@ -201,7 +195,7 @@
         margin: 0 2em;
     }
 
-    :global(#footer-panel #connections .-block-anchor) {
+    #footer-panel :global(#connections .-ba) {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -212,14 +206,22 @@
         transition: opacity 500ms ease;
     }
 
-    :global(#footer-panel #connections .-block-anchor img) {
-        width: 1em;
-        height: 1em;
+    #footer-panel :global(#connections .-ba img) {
+        width: 1rem;
+        height: 1rem;
+
+        transition: 200ms ease;
     }
 
-    :global(#footer-panel #connections .-block-anchor:hover) {
+    #footer-panel :global(#connections .-ba:hover) {
         opacity: 1;
         text-decoration: none;
+    }
+
+    #footer-panel :global(#connections .-ba:hover img) {
+        transform: translateY(-0.05rem);
+
+        filter: drop-shadow(0 0.1rem 0 #aaa);
     }
 
     #footer-panel #connections .handle {
@@ -232,16 +234,16 @@
         text-align: center;
     }
 
-    @media (max-width: 768px) {
-        :global(#footer-panel #connections a > img) {
-            width: 2em;
-            height: 2em;
+    @media (max-width: 1200px) {
+        #footer-panel :global(#connections .-ba img) {
+            width: 1.5rem;
+            height: 1.5rem;
         }
 
         #footer-panel #connections {
             justify-content: flex-start;
-            column-gap: 1em;
-            row-gap: 0.25em;
+            column-gap: 1rem;
+            row-gap: 0.25rem;
 
             margin: 0;
         }

@@ -1,29 +1,28 @@
 <script lang="ts">
-    export const metadata = {
-        title: "acta est fabula, plaudite.",
-        published: new Date("2026-08-13T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h1>v26.28.0: acta est fabula, plaudite.</h1>
-
-    <p class="dim">
-        Release date: <b>August 13th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-28-0"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <p>
         <b>This is the final release for <code>core</code>.</b>
         For more information, please refer to
-        <a href="/docs/blog/2026/08/core-has-been-completed">this article</a>.
+        <Ia href="/blog/2026/08/core-has-been-completed">this article</Ia>.
     </p>
 
     <ul>
         <li>
             <span class="col bright yellow">~</span>
-            Updated the <a href="/profile">profile</a>,
-            <a href="/about">about</a>, <a href="/projects">projects</a>, and
-            <a href="/">home</a> pages.
+            Updated the <Ia href="/profile">profile</Ia>,
+            <Ia href="/about">about</Ia>, <Ia href="/projects">projects</Ia>,
+            and
+            <Ia href="/">home</Ia> pages.
         </li>
         <li>
             <span class="col bright yellow">~</span>

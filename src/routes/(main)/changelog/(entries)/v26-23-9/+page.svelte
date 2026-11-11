@@ -1,15 +1,14 @@
 <script lang="ts">
-    export const metadata = {
-        published: new Date("2026-06-16T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.23.9</h2>
-
-    <p class="dim">
-        Release date: <b>June 16th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-23-9"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <p>
         <b>We're officially getting ready for the navigation UI/UX overhaul!</b>
@@ -35,7 +34,7 @@
 
         <li>
             <span class="col bright green">+</span>
-            Implemented a basic <a href="/about">about</a> page.
+            Implemented a basic <Ia href="/about">about</Ia> page.
         </li>
 
         <li>

@@ -1,10 +1,4 @@
-<script>
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
-</script>
-
 <section>
-    <Breadcrumbs />
-
     <h1>Versioning Conventions</h1>
 
     <p>

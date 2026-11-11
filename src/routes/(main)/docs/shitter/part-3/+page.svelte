@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Break from "$lib/components/Blocks/Break.svelte";
-    import DocumentNavigation from "$lib/components/Navigation/DocumentNavigation.svelte";
+    import Break from "#lib/components/Blocks/Break.svelte";
+    import DocumentNavigation from "#lib/components/Navigation/DocumentNavigation.svelte";
     import walcImage from "../assets/image16.png";
     import surrender from "../assets/image6.png";
 </script>

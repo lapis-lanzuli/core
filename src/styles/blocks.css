@@ -9,7 +9,7 @@ td:not(.plain) {
 
     text-align: center;
     border-collapse: collapse;
-    padding: 0.75em;
+    padding: 0.75rem;
     border: 2px solid rgba(255, 255, 255, 0.1);
 
     transition:
@@ -48,7 +48,7 @@ pre:not(.plain) code {
     width: max-content;
     min-width: 100%;
 
-    font-size: 0.9em;
+    font-size: 0.9rem;
     line-height: 1.65;
 }
 
@@ -65,16 +65,18 @@ pre:not(.plain) code {
 blockquote:not(.plain) {
     border-left: 4px solid rgba(255, 255, 255, 0.25);
     margin-left: 0;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
 
-    padding: 0.5em 1em;
+    padding: 0.5rem 1rem;
 }
 
-blockquote:not(.plain).info {
+blockquote:not(.plain).info,
+blockquote:not(.plain).information {
     border-left-color: rgb(92, 255, 97);
     background: rgba(21, 255, 0, 0.08);
 }
 
+blockquote:not(.plain).warn,
 blockquote:not(.plain).warning {
     border-left-color: rgb(255, 222, 92);
     background: rgba(255, 255, 0, 0.08);
@@ -85,21 +87,50 @@ blockquote:not(.plain).error {
     background: rgba(255, 0, 0, 0.08);
 }
 
-ul:not(.plain),
-ol:not(.plain) {
-    margin: 0 1em;
+ul,
+ol {
+    margin: 0 1rem;
     padding: 0;
 }
 
-li:not(.plain) {
-    margin: 0.25em 0.5em;
+ul:not(.spacious) > li,
+ol:not(.spacious) > li {
+    margin: 0.25rem 0.5rem;
 }
 
-ul:not(.plain) ul:not(.plain),
-ol:not(.plain) ol:not(.plain) {
+ul.spacious > li,
+ol.spacious > li {
+    margin: 0.75rem 0.5rem;
+}
+
+ul ul,
+ol ol {
     list-style-type: circle;
-    margin-top: 0.5em;
-    margin-left: 1em;
+    margin: 0.5rem 1rem;
+}
+
+main {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+[data-scale="1"] {
+    main {
+        align-items: center;
+    }
+}
+
+/* TODO: SOMEHOW FIND A WAY TO MAKE THE WACLE AHH SCALING*/
+
+/* im prob gonna use this later */
+main.frozen {
+    overflow: hidden;
+    touch-action: none;
+    pointer-events: none;
+    user-select: none;
 }
 
 section {
@@ -110,7 +141,7 @@ section {
     flex: none;
 
     overflow: hidden;
-    padding: 3em;
+    padding: 3rem 6rem;
 }
 
 section.fixed-bg {
@@ -120,37 +151,101 @@ section.fixed-bg {
     background-attachment: fixed;
 }
 
-section.stretched {
-    min-height: calc(100vh);
-}
-
 @media (max-width: 768px) {
     section {
-        padding: 2em;
+        padding: 2rem;
     }
 }
 
 section:not(.disable-layout),
 section header:not(.disable-layout),
-details:not(.disable-layout),
+blockquote:not(.disable-layout),
+li > .content,
+details > .content,
 .enable-layout {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
+    gap: 1.5rem;
 }
 
-section:not(.disable-spacing),
-section header:not(.disable-spacing),
-.enable-layout {
-    gap: 1em;
+details:not(.disable-layout) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+}
+
+details {
+    margin: 0;
+    padding: 0;
+}
+
+details > summary {
+    cursor: pointer;
+}
+
+details:not(.collapsible) > summary::marker {
+    content: "> ";
+}
+
+details:not(.collapsible)[open] > summary {
+    margin-bottom: 1rem;
+}
+
+details:not(.collapsible)[open] > summary::marker {
+    content: "< ";
+}
+
+details.collapsible > summary::marker {
+    content: "";
+}
+
+details.collapsible > summary {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+
+    background: black;
+    border: 0.1rem solid rgba(200, 150, 255, 0.5);
+    border-radius: 0.25rem;
+
+    font-size: 1.1em;
+
+    transition: 200ms ease;
+}
+
+details.collapsible > summary:hover {
+    background: rgb(20, 0, 40);
+    font-weight: 600;
+}
+
+details.collapsible[open] > summary {
+    border-color: rgba(100, 0, 255, 0.75);
+    background: rgb(40, 0, 80);
+    font-weight: 600;
 }
 
 main > section:first-of-type:not(.disable-initial-padding),
 .enable-initial-padding {
-    padding-top: calc(20vh + 4em) !important;
+    padding-top: calc(20vh + 4rem) !important;
+}
+
+main > section {
+    background: var(--bg);
+    max-width: 100%;
 }
 
 section.enable-padding {
-    padding: 3em;
+    padding: 3rem;
+}
+
+section.stretched,
+main > section:first-of-type {
+    min-height: 100vh;
+}
+
+details > section {
+    padding: 3rem 3rem;
 }

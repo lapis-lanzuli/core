@@ -1,15 +1,14 @@
-<script lang="ts" module>
-    export const metadata = {
-        published: new Date("2026-08-01T00:00:00+09:00"),
-    };
+<script lang="ts">
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h1>Minor update v26.27.1</h1>
-
-    <p class="dim">
-        Release date: <b>August 1st, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-27-1"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
@@ -19,7 +18,7 @@
         <li>
             <span class="col bright green">+</span>
             <b
-                >Added the Quick Links section in the <a href="/">frontpage</a
+                >Added the Quick Links section in the <Ia href="/">frontpage</Ia
                 >.</b
             >
         </li>
@@ -29,7 +28,7 @@
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Moved the <a href="/conlangs">conlangs</a> section from
+            Moved the <Ia href="/conlangs">conlangs</Ia> section from
             <code>/projects/conlangs</code>
             to
             <code>/conlangs</code>.<br />

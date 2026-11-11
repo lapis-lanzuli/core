@@ -1,16 +1,14 @@
 <script lang="ts">
-    export const metadata = {
-        title: "The Navigation Overhaul",
-        published: new Date("2026-06-19T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h1>v26.24.0: The Navigation Overhaul</h1>
-
-    <p class="dim">
-        Release date: <b>June 19th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-24-0"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <p>
         <b>The long-awaited navigation UI/UX overhaul is finally here!</b><br
@@ -22,9 +20,8 @@
         />
 
         <b>
-            As always, please feel free to <a href="#connections"
-                >get in touch</a
-            >!
+            As always, please feel free to
+            <Ia href="/contact">get in touch</Ia>!
         </b>
         We'd love to hear your feedback. Have a nice day!
     </p>
@@ -54,7 +51,7 @@
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Reworked the <a href="/credits/assets/">asset credits page</a>.
+            Reworked the <Ia href="/credits/assets/">asset credits page</Ia>.
         </li>
         <li>
             <span class="col bright yellow">~</span>

@@ -1,7 +1,9 @@
 <script lang="ts">
-    import { pickRandom, randInt } from "$lib";
-    import { Ia } from "$lib/components/Links";
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
+    import { pickRandom, randInt } from "#lib";
+    import { LzStorage } from "#lib/storage.ts";
+    import type { LzMetadata } from "#lib/metadata.js";
+    import { onMount } from "svelte";
+    import Meta from "#lib/components/Meta.svelte";
 
     const profileDesc = "very cool profile image of my original character Iris";
     const timeFormatter = new Intl.DateTimeFormat("en-US", {
@@ -80,42 +82,39 @@
 
     const triviaList = [
         // Programming & Tech
-        "I have a very weird love-hate relationship with programming.",
+        "i have a very weird love-hate relationship with programming.",
         "SvelteKit is my favorite framework.",
-        "This website is built with SvelteKit.",
-        "I like giving my projects unnecessarily elaborate names.",
-        "I HATE REACT. Screw React states.",
-        'The first webpage I ever made was a page for my conlang, Lanzoorian.<br>Yes, I know that name sucks. Anyways, this conlang has been retired since then in favor of <a href="/conlangs/proto-lanzavel">Lanzavel</a>.',
-        "This site actually started as a single-page profile website.",
-        "I genuinely lose my mind when I try to understand recursive functions.",
-        "I like command-line interfaces more than I probably should.",
-        "I have a Python program that backs up my workspace folder.",
-        "I once spent 2 hours debugging an issue while editing a project,<br>until I realized I was in the wrong directory.",
-        "I make webpage games to study and memorize stuff for my tests.",
+        "i like giving my projects unnecessarily elaborate names.",
+        "i HATE REACT. screw React states.",
+        "the first webpage I ever made was a page for my conlang, Lanzoorian.<br>yes, i know that name sucks. anyways, this conlang has been retired since then in favor of Lanzavel.",
+        "this site actually started as a single-page profile website.",
+        "i absolutely HATE recursive functions.",
+        "i like CLIs more than i probably should.",
+        "i have a python program that backs up my workspace folder.",
+        "i once spent 2 hours struggling while editing a project<br>until i realized i was in the wrong directory. 🤦",
+        "i make webpage games to study and memorize stuff for my tests.",
 
         // Languages
-        "Contrary to popular belief, my favorite language is actually English.",
-        "I like how Japanese letters look.",
-        'My favorite sound is <span class="ipa">/x/</span>.',
-        'I pronounce GIF as <span class="ipa">/gɪf/</span>.',
-        "I really like words with unusual consonant clusters.",
-        "I enjoy finding unnecessarily complicated ways to say simple things.",
-        "I am better at English input than English output.",
-        "I think Latin makes every word sound like a mythical artifact.",
-        "I have a weird obsession with Greek letters.",
+        "contrary to popular belief, my favorite language is actually English.",
+        "i like how Japanese letters look.",
+        'my favorite sound is <span class="ipa">/x/</span>.',
+        'i pronounce GIF as <span class="ipa">/gɪf/</span>.',
+        "i really like words with unusual consonant clusters.",
+        "i'm really inconsistent when it comes to writing.",
+        "i think Latin makes every word sound like a mythical artifact.",
+        "i have a weird obsession with Greek letters.",
 
         // Common
-        "I have a love-hate relationship with math;<br>love because math is actually a goated subject,<br>and hate because of how it's taught and forced.",
-        "My favorite color is purple. It used to be blue, though.",
-        "My favorite numbers are 11, 13, and 17.<br>I especially like 13 for some reason.",
-        "I prefer cats over dogs.",
-        "I have never drank coffee ever in my life.",
-        "I believe water is the best drink.",
-        "I enjoy going down extremely specific rabbit holes.",
-        "I am obsessed with monospace fonts.",
-        "I can spend an unreasonable amount of time choosing a font.",
-        "I have a tendency to memorize random things perfectly.",
-        "This sentence is false.",
+        "i have a love-hate relationship with math;<br>love because math is actually a goated subject,<br>and hate because of how it's taught and forced.",
+        "my favorite color is purple. it used to be blue, though.",
+        "my favorite numbers are 11, 13, and 17.<br>i especially like 13 for some reason.",
+        "i can see colors in numbers for some reason. 3 is yellow-ish beige, 7 is either tan or cyan, and so on.",
+        "water is the best drink.",
+        "i enjoy going down extremely specific rabbit holes.",
+        "i am obsessed with monospace fonts.",
+        "i can spend an unreasonable amount of time choosing a font.",
+        "i have a tendency to memorize random things perfectly.",
+        "this sentence is false. :trollface:",
     ];
 
     const specialTriviaList = [
@@ -124,24 +123,21 @@
         "CSS is a programming language if you believe hard enough...",
 
         // Funni
-        "I think this text is yellow. Feel free to prove me wrong.",
-        "I ate a watermelon while writing this sentence.",
-        "I'm allergic to peaches.",
-        "Your Lanzaforge™ subscription expires in 10 minutes.<br>Please renew immediately to continue using lanzoor.dev.",
+        "i think this text is yellow. feel free to prove me wrong.",
+        "i'm allergic to peaches.",
         "emu is meaning smile!! :walc",
-        "acta est fabula, plaudite.",
-        "life/changing",
         "visual/studio",
+        '"you sound vaguely russian lmao" - filipino guy',
 
         // Easter Eggs
-        "I am legally required to put at least one easter egg in every website I make.",
-        "Enter the Konami code.",
-        "May the eggs duplicate in peace.",
-        "It-all-begins.",
-        "I like spending time on the frontpage without doing anything whatsoever.",
+        "i am legally required to put at least one easter egg in every website I make.",
+        "enter the konami code. you won't regret it...",
+        "may the eggs duplicate in peace.",
+        "it-all-begins.",
         "Lan lan man. The sixteenth developer, lying hidden somewhere in this website. The one they call the Ultimate Procrastinator. Watch out for him.",
+        "what happens when you shatter the boundaries?",
 
-        '<b class="col bright yellow">Hey, thank you for spending a little bit of your time here! ♡</b><br>I put a lot of myself into the things I make, so knowing that someone chose to look at them really means a lot to me.',
+        '<b class="col bright yellow">hey, thank you for spending a little bit of your time here! ♡</b><br>i put a lot of myself into the things i make, so knowing that someone chose to look at them really means a lot to me.',
     ];
 
     type TriviaType = null | "normal" | "special";
@@ -165,516 +161,819 @@
 
     let trivia = $state("");
     let triviaType = $state<TriviaType>(null);
+
+    let boundaryShatter = $state(false);
+    let shaking = false;
+    let shatterLevel = 0;
+
+    function shatter(event: KeyboardEvent) {
+        if (event.key === "r") {
+            boundaryShatter = false;
+            LzStorage.set("boundaryShatter", "false");
+            return;
+        }
+
+        if (event.key !== "v" || shaking) return;
+        if (boundaryShatter) return;
+
+        shaking = true;
+        shatterLevel++;
+
+        if (shatterLevel >= 10) {
+            let answer = confirm(
+                "are you sure you want to shatter the boundaries?",
+            );
+
+            if (answer) {
+                boundaryShatter = true;
+                alert(
+                    "you've officially shattered the boundaries! this is just an excuse to talk about the more private stuff. you may now look for secrets within the page. you can press <R> to undo this change.",
+                );
+                LzStorage.set("boundaryShatter", "true");
+            }
+
+            shatterLevel = 0;
+        }
+
+        document.documentElement.classList.remove("shake");
+        void document.documentElement.offsetWidth;
+        document.documentElement.classList.add("shake");
+
+        setTimeout(() => {
+            document.documentElement.classList.remove("shake");
+            shaking = false;
+        }, 150);
+    }
+
+    export const metadata: LzMetadata = {
+        title: "profile",
+        description: "a short section dedicated to my profile!",
+    };
+
+    onMount(() => {
+        if (LzStorage.get("boundaryShatter", "false") === "true") {
+            boundaryShatter = true;
+        }
+    });
 </script>
 
-<section id="intro-bg" class="disable-padding disable-initial-padding">
-    <section id="intro" class="enable-initial-padding">
-        <Breadcrumbs />
+<svelte:window onkeydown={shatter} />
 
-        <div class="header">
+<section id="intro">
+    <Meta {metadata} />
+
+    <div class="card">
+        <div class="wrapper">
             <img
                 class="profile"
-                src="/assets/contributors/iris-modern.png"
+                src="/assets/iris.png"
                 alt={profileDesc}
                 title={profileDesc}
             />
-
-            <div class="name-group">
-                <div class="name">Lapis Lanzuli</div>
-
-                <div class="handle">@lanzoor</div>
-            </div>
         </div>
 
-        <div class="description">
-            <b
-                >My name is <span class="col bright purple">Lapis Lanzuli</span
-                >!</b
-            ><br />
-            I'm just a random student from Korea who enjoys creating things, solving
-            interesting problems, and learning something new every day.<br />
-            I'm obsessed with programming, learning languages, science and anime!<br
-            />
+        <div class="group">
+            <div class="name">Lapis Lanzuli</div>
+
+            <div class="handle"><b>@lapis-lanzuli</b> ⬩ @lanzoor</div>
         </div>
-    </section>
+    </div>
+
+    <p>
+        hey, nice to see you again! :D <b
+            >my name is <span class="col bright purple">Lapis Lanzuli</span>.</b
+        >
+    </p>
+
+    <p>
+        this is my profile page, which contains anything about me that you might
+        find useful. have fun!
+    </p>
 </section>
 
 <section id="bio">
-    <h1><span class="col bright yellow">[ 01 ]</span> names</h1>
+    <h1><span class="col bright yellow">[ 01 ]</span> names & meta</h1>
 
     <p>
         <b>
-            I go by the name of
+            i go by the name of
             <span class="col bright purple">Lapis Lanzuli</span>, which is
-            roughly pronounced
+            <i>roughly</i> pronounced
             <span class="ipa">/ˈlæpɪs lænˈzʊliː/</span>.
-        </b>
+        </b><br />
+
+        my name actually used to be
+        <span class="col bright purple">Lanzoor</span> but i changed it. it's still
+        my "internal" name, though, and i'm willing to change it fully once i'm comfortable
+        with my new aliases.
     </p>
 
     <p>
-        My primary name used to be
-        <span class="col bright purple">Lanzoor</span>, but people kept
-        mispronouncing my name. To be fair, it was kind of misleading. It's
-        still my "internal" name, though.
+        my other names include Lanzy (<span class="ipa">/ˈlæn.ziː/</span>),
+        Lapis, Lanzuli, lan lan man, Lan Z. Oore, and lanlanroll.
     </p>
 
     <p>
-        If you're close to me, feel free to call me just Lapis or Lanzuli. Other
-        names include Lanzy (<span class="ipa">/ˈlæn.ziː/</span>) and lan lan
-        man.
+        <b>my pronouns are <b class="col bright purple">he/they</b>!</b>
+        <span class="dim">(might change later)</span><br />
+        since these are just pronouns that i'm the most comfortable with, feel free
+        to use <span class="col bright red">any/all</span>.<br />
+        <span class="dim">
+            (...maybe except <span class="col bright orange">it/its</span> lmao)
+        </span><br />
     </p>
+
+    <p>i'm also aroace. <span class="dim">(aromatic asexual)</span></p>
 
     <h1>
-        <span class="col bright yellow">[ 02 ]</span> nationality & location
+        <span class="col bright yellow">[ 02 ]</span> nationality
     </h1>
 
     <p>
-        <b title="I am not from North Korea. yes there's a difference :walc"
-            >I am from South Korea 🇰🇷!</b
-        >
-        I currently live in 📍 Gyeonggi-do.
+        <b>i am from South Korea 🇰🇷!</b> no i am not from North Korea, yes there's
+        a difference. don't ask me :D
     </p>
+
+    <p>i currently live in a small-ish city located in 📍 Gyeonggi-do.</p>
 
     <p>
         <b>
-            We use the glorious GMT+9 <span class="dim"
+            we use the glorious GMT+9 <span class="dim"
                 >(KST, Korean Standard Time)</span
             > timezone.
         </b><br />
-        It is currently
+        it is currently
         <span
-            title="This counter is updated every 5 seconds. I don't want to overload your browser, yk."
+            title="this counter is updated every 5 seconds. i don't want to overload your browser, yk."
         >
             <b>{time}</b>, <b>{date}</b>
-        </span> in my location. Feel free to send me messages regardless of this counter.
+        </span>
+        in my location.
+        <b>feel free to send me messages regardless of this counter!</b>
     </p>
 
-    <h1><span class="col bright yellow">[ 03 ]</span> personality & meta</h1>
+    <h1><span class="col bright yellow">[ 03 ]</span> personality</h1>
+
+    <p>here are a few notes about my personality:</p>
+
+    <ul class="spacious">
+        <li>
+            <b>my MBTI type is <span class="col bright cyan">INTP</span>.</b>
+        </li>
+        <li>
+            <b>i am <i>EXTREMELY</i> introverted unless i'm online.</b> i have
+            intense social anxiety.<br />
+            please ignore me if you <i>somehow</i> manage to find me in real life
+            /hj
+        </li>
+        <li>
+            <b>
+                i absolutely <i>HATE</i> memorizing stuff without second thought.
+            </b><br />
+
+            i like to understand why and how things actually work.
+        </li>
+        <li>
+            <b>i love yapping</b>, whether it'd be yapping myself or listening
+            to someone yap.
+        </li>
+        <li>i'm autistic.</li>
+        <li>i am the #1 overthinker in korea trust</li>
+    </ul>
 
     <p>
-        <b>My MBTI type is <span class="col bright cyan">INTP</span>.</b><br />
-        I absolutely <i>HATE</i> memorizing stuff without second thought. I like
-        to understand why and how things work.<br />
-    </p>
-
-    <p>
-        I am <i>EXTREMELY</i> introverted unless I'm online.<br />
-        I have social anxiety and chronic depression. I also show symptoms associated
-        with autism, ADHD, and OCD. Please ignore me if you manage to find me in real
-        life. /hj
-    </p>
-
-    <p>
-        <b
-            >My rule is: <i>if you respect me, I respect you.</i> Simple as that.</b
-        ><br />
-        I enjoy talking with people who are open-minded and willing to have genuine
+        <b>
+            my rule is: <i>if you respect me, i respect you.</i>
+        </b>
+        it's that simple!<br />
+        i enjoy talking with people who are open-minded and willing to have genuine
         conversations.
-        <i
-            >Please do not talk to me if all you do is ragebait or make fun of
-            me.</i
-        >
+        <i>
+            please do not talk to me if all you do is ragebait or make fun of
+            me.
+        </i>
     </p>
+
+    <details class="dim-detail" class:hidden={!boundaryShatter}>
+        <summary> toggle details </summary>
+
+        <div class="content">
+            <p>hey there, congrats on finding the secret! yay~</p>
+
+            <p>
+                <b>
+                    this section just contains some private stuff about myself
+                    that's <i>probably</i> worth mentioning.
+                </b>
+            </p>
+
+            <p>
+                however,
+                <b>
+                    please do note that this might also discomfort some users,
+                </b>
+                so <i>please</i> do not feel obligated to read the entire thing.
+            </p>
+
+            <p>
+                otherwise, if you're interested,
+                <b>
+                    i kindly ask you not to misuse this information or use this
+                    to your advantage.
+                </b>
+                thanks! {"<3"}
+            </p>
+
+            <details>
+                <summary> continue </summary>
+
+                <div class="content">
+                    <p>i have intense social anxiety and chronic depression.</p>
+
+                    <p>
+                        i also often experience panic attacks when i'm reminded
+                        of my traumas or placed in such a situation, which
+                        include:
+                    </p>
+
+                    <ul>
+                        <li>
+                            <b>dogs</b>.
+                        </li>
+                        <li>
+                            <b>sports involving throwing balls</b>, including
+                            soccer, basketball and dodgeball.
+                        </li>
+                        <li>
+                            <b>irl human interactions</b>, especially when
+                            impromptu.
+                        </li>
+                        <li>
+                            <b>the dark</b>.
+                        </li>
+                    </ul>
+
+                    <p>
+                        <b>
+                            i show symptoms associated with autism, ADHD, and
+                            OCD.
+                        </b>
+                        i also tend to overreact to everything, which means that i
+                        may start a drama without noticing.
+                        <b>
+                            if i'm bothering you, then <i>please</i> let me know.
+                        </b>
+                    </p>
+                </div>
+            </details>
+        </div>
+    </details>
 </section>
 
-<section id="tech-bg" class="disable-padding">
-    <section id="tech">
-        <h1>Tech</h1>
+<section id="interests">
+    <h1>Interests</h1>
 
-        <p>
-            <b>
-                I've been fascinated by computers ever since I was around ten.
-            </b>
-            I've always enjoyed making short games and programs.
-        </p>
+    <p>
+        as you can probably see, <b>i have a LOT of interests.</b>
+    </p>
 
-        <p>
-            <b>
-                Nowadays I spend most of my time building software & websites
-                and exploring topics like cybersecurity.
-            </b>
-        </p>
+    <details id="tech" class="collapsible">
+        <summary>i like programming!</summary>
 
-        <h1>🖥️ Programming</h1>
+        <section class="content">
+            <p>
+                <b
+                    >programming has always been my favorite hobby, and also the
+                    hobby I'm the most passionate about.</b
+                >
 
-        <p>
-            <b
-                >Programming has always been my favorite hobby, and also the
-                hobby I'm the most passionate about.</b
-            >
-        </p>
+                i actually started taking programming seriously in around
+                <span class="col bright cyan">late 2024</span>. since then it's
+                become one of my favorite hobbies.
+            </p>
 
-        <p>
-            I actually started taking programming seriously in around
-            <span class="col bright green">late 2024</span>. Since then it's
-            become one of my favorite hobbies.
-        </p>
+            <p>
+                <b>
+                    most of my projects are web-based because of how accessible
+                    the web is.
+                </b>
+                if someone has a browser,
+                <i>they can view what i build instantly</i> without having to download
+                or compile anything.
+            </p>
 
-        <h2>🌐 Web Development</h2>
-
-        <p>
-            <b>
-                Most of my projects are web-based because of how accessible the
-                web is.
-            </b>
-            If someone has a browser,
-            <i>they can view what I build instantly</i> without having to download
-            or compile anything.
-        </p>
-
-        <h3>Frameworks</h3>
-
-        <div class="stacks">
-            <div class="stack svelte" title="SVELTE SUPREMACY RAHHHH">
-                SvelteKit
+            <div class="stacks">
+                <div class="stack svelte" title="SVELTE SUPREMACY RAHHHH">
+                    SvelteKit
+                </div>
+                ⬩
+                <div class="stack next">Next.js</div>
             </div>
-            ⬩
-            <div class="stack next">Next.js</div>
-        </div>
 
-        <h3>Languages</h3>
+            <div class="stacks">
+                <div class="stack svelte">Svelte</div>
+                ⬩
+                <div class="stack react">React</div>
+                ⬩
+                <div class="stack js">JavaScript</div>
+                ⬩
+                <div class="stack ts">TypeScript</div>
+                ⬩
+                <div class="stack css">CSS</div>
+                ⬩
+                <div class="stack html">HTML</div>
+            </div>
 
-        <div class="stacks">
-            <div class="stack svelte">Svelte</div>
-            ⬩
-            <div class="stack react">React</div>
-            ⬩
-            <div class="stack js">JavaScript</div>
-            ⬩
-            <div class="stack ts">TypeScript</div>
-            ⬩
-            <div class="stack css">CSS</div>
-            ⬩
-            <div class="stack html">HTML</div>
-            ⬩
-            <div class="stack php">PHP</div>
-        </div>
+            <p>
+                <b>
+                    i primarily use
+                    <span class="col bright red">SvelteKit</span>
+                    for web projects, since it aligns with my coding principles and
+                    doesn't have much boilerplate.
+                </b>
+                i also have experience with
+                <b>Next.js</b> and <span class="col bright cyan">React</span>.
+            </p>
 
-        <p>
-            <b>
-                I primarily use
-                <span class="col bright red">SvelteKit</span>
-                for new web projects, since it aligns with my coding principles and
-                doesn't have much boilerplate.
-            </b>
-            I also have experience with
-            <b>Next.js</b> and <span class="col bright cyan">React</span>.
-        </p>
+            <p>
+                i have <i>some</i> experience with
+                <span class="col bright orange">backend</span>
+                development as well. i've built
+                <b
+                    >REST APIs, Discord bots, database integrations, and API
+                    systems
+                </b> although most of them have been discontinued due to dismotivation.
+            </p>
 
-        <p>
-            I also have some experience with <span class="col bright orange"
-                >backend</span
-            >
-            development as well! I've built
-            <b
-                >REST APIs, Discord bots, database integrations, and API
-                systems.
-            </b>
-            <span class="dim"
-                >(my API systems prob have more uptime than github 💀)</span
-            >
-        </p>
+            <hr />
 
-        <h2>🖥️ General Programming</h2>
+            <div class="stacks">
+                <div class="stack python">Python</div>
+                ⬩
+                <div class="stack c">C</div>
+                ⬩
+                <div class="stack rust">Rust</div>
+                ⬩
+                <div class="stack bash">Bash</div>
+                ⬩
+                <div class="stack zsh">Zsh</div>
+            </div>
 
-        <div class="stacks">
-            <div class="stack python">Python</div>
-            ⬩
-            <div class="stack c">C</div>
-            ⬩
-            <div class="stack rust">Rust</div>
-        </div>
+            <p>
+                <b
+                    >i usually write scripts in <span class="col bright blue"
+                        >python</span
+                    ></b
+                >
+                since it suits me the best. i find the syntax pretty straightforward
+                and easy to work with.
+                <b>i'm familiar with with most of the common libraries.</b>
+            </p>
 
-        <h3>Scripting</h3>
+            <p>i mainly use python for:</p>
 
-        <div class="stacks">
-            <div class="stack bash">Bash</div>
-            ⬩
-            <div class="stack zsh">Zsh</div>
-        </div>
+            <ul class="spacious">
+                <li>making CLI and TUI programs & utilities.</li>
+                <li>
+                    making math-related animation videos using
+                    <code>manim</code>.
+                </li>
+                <li>
+                    automating repetitive tasks, such as making backups and
+                    running long commands.
+                </li>
+            </ul>
+        </section>
+    </details>
 
-        <p>
-            <b
-                >I usually write scripts in <span class="col bright blue"
-                    >Python</span
-                >.</b
-            >
-            Although I also have experience with C and Rust, I'm expected to write
-            code in Python since it suits me.
-        </p>
+    <details id="cybersecurity" class="collapsible">
+        <summary> i like learning cybersecurity! </summary>
 
-        <p>
-            <b
-                >I have made a few CLI, TUI and GUI programs using Python
-                before, and I have experience with most of the common libraries.</b
-            >
-            I also have experience making math-related animation videos using
-            <code>manim</code>.
-        </p>
+        <section class="content">
+            <div class="stacks">
+                <div class="stack">networking</div>
+                ⬩
+                <div class="stack">cryptography</div>
+                ⬩
+                <div class="stack">OSINT</div>
+                ⬩
+                <div class="stack">OPSEC</div>
+            </div>
 
-        <p>
-            I also use Python for
-            <span class="col bright green">automating repetitive tasks</span>
-            (such as making backups and running long commands) and
-            <span class="col bright cyan">cybersec</span> utilities.
-        </p>
+            <p>
+                over time my interest in programming has led me towards
+                networking and cybersecurity.
 
-        <h1>🔐 Cybersecurity</h1>
+                <b>
+                    i like understanding how systems
 
-        <p>
-            Over time, my curiosity about how computers work expanded into
-            networking and cybersecurity.
+                    <span class="col bright cyan">communicate</span>, where they
+                    can
+                    <span class="col bright red">fail</span>, and how they can
+                    be
+                    <span class="col bright green">improved</span>.
+                </b>
+            </p>
 
-            <b>
-                I like understanding how systems
+            <p>
+                i like learning networking as well as how the internet actually
+                works. i'm also really interested in OSINT and OPSEC.
+            </p>
+        </section>
+    </details>
 
-                <span class="col bright cyan">communicate</span>, where they can
-                <span class="col bright red">fail</span>, and how they can be
-                <span class="col bright green">improved</span>.
-            </b>
-        </p>
+    <details id="languages" class="collapsible">
+        <summary>i like learning and making languages!</summary>
 
-        <h2>Interests</h2>
-
-        <div class="stacks">
-            <div class="stack">Networking</div>
-            ⬩
-            <div class="stack">Cryptography</div>
-            ⬩
-            <div class="stack">OSINT</div>
-            ⬩
-            <div class="stack">OPSEC</div>
-        </div>
-
-        <p>
-            I like learning networking as well as how the internet actually
-            works. I'm also really interested in OSINT
-            <span class="dim">(Open Source Intelligence)</span>
-            and OPSEC.
-            <span class="dim">(Operational Security)</span>
-        </p>
-
-        <h1>Development Environment</h1>
-
-        <p>
-            <b>
-                I currently use
-
-                <span class="col bright purple">EndeavourOS</span>
-                as my primary operating system.
-                <span class="dim">(or kernel, whatever lmao)</span>
-            </b>
-            <br />
-            I switched to Linux at around
-            <span class="col bright cyan">May 2025</span>, starting with
-            <span class="col bright green">Linux Mint</span>.
-        </p>
-
-        <p>
-            I also have experience with managing virtual machines because why
-            not. They're pretty cool I guess.
-        </p>
-
-        <p>
-            <b>
-                I use a <i>heavily</i> customized version of
-                <span class="col bright blue">VSCodium</span>
-            </b>
-            for most tasks.
-        </p>
-    </section>
-</section>
-
-<section id="languages">
-    <div class="word-cloud">
-        {#each words as word}
-            <span
-                class="word noto-sans"
-                style={`
+        <section class="content">
+            <div class="word-cloud">
+                {#each words as word}
+                    <span
+                        class="word noto-sans"
+                        style={`
                 left:${word.style.x}%;
                 top:${word.style.y}%;
                 font-size:${word.style.s};
                 color:${word.color};
                 transform:translate(-50%, -50%) rotate(${word.style.r ?? 0}deg);
             `}
-            >
-                {word.text}
-            </span>
-        {/each}
-    </div>
-
-    <h1>Languages</h1>
-
-    <ul>
-        <li>
-            <h3>
-                <img
-                    src="/assets/icons/countries/south-korea.svg"
-                    alt="Korea Icon"
-                />
-                <div>
-                    Korean <span class="adaptive-text-shadow col green"
-                        >(<i>native</i>, C1)</span
                     >
-                </div>
-            </h3>
+                        {word.text}
+                    </span>
+                {/each}
+            </div>
 
-            <p>I am a native Korean speaker.</p>
-        </li>
-        <li>
-            <h3>
-                <img
-                    src="/assets/icons/countries/united-kingdom.svg"
-                    alt="UK Icon"
-                />
-                <div>
-                    English <span class="adaptive-text-shadow col bright green"
-                        >(B2 ~ C1)</span
-                    >
-                </div>
-            </h3>
+            <ul>
+                <li>
+                    <h3>
+                        <img
+                            src="/assets/icons/countries/south-korea.svg"
+                            alt="Korea Icon"
+                        />
+                        <div>
+                            korean <span class="adaptive-text-shadow col green"
+                                >(<i>native</i>, C1)</span
+                            >
+                        </div>
+                    </h3>
 
-            <p>
-                <b>I learned English through the immersion method™.</b> Basically,
-                I spent my free time consuming English content and communicating with
-                friends online. This method was very effective for me because I was
-                able to learn while actually enjoying it.
-            </p>
+                    <p>i'm a native korean speaker!</p>
+                </li>
+                <li>
+                    <h3>
+                        <img
+                            src="/assets/icons/countries/united-kingdom.svg"
+                            alt="UK Icon"
+                        />
+                        <div>
+                            english <span
+                                class="adaptive-text-shadow col bright green"
+                                >(B2 ~ C1)</span
+                            >
+                        </div>
+                    </h3>
 
-            <p>I'm still a bit weak at language output, though.</p>
-        </li>
-        <li>
-            <h3>
-                <img src="/assets/icons/countries/japan.svg" alt="Japan Icon" />
-                <div>
-                    Japanese <span
-                        class="adaptive-text-shadow col bright yellow"
-                        >(B1 ~ B2, N3)</span
-                    >
-                </div>
-            </h3>
+                    <div class="content">
+                        <p>
+                            <b
+                                >i learned english through the immersion
+                                method&trade;.</b
+                            >
+                            i spent my free time consuming english content and communicating
+                            with friends online via text.
+                            <b
+                                >this method was very effective for me because I
+                                was able to learn while actually enjoying it.</b
+                            >
+                        </p>
+
+                        <p>
+                            i'm still a bit weak at language output, though. i
+                            tend to be really inconsistent, especially with
+                            pronunciation. i'm actively trying to fix this by
+                            communicating with friends online via voice chat.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <h3>
+                        <img
+                            src="/assets/icons/countries/japan.svg"
+                            alt="Japan Icon"
+                        />
+                        <div>
+                            japanese <span
+                                class="adaptive-text-shadow col bright yellow"
+                                >(B1 ~ B2, N3)</span
+                            >
+                        </div>
+                    </h3>
+
+                    <p>
+                        <b>
+                            i started learning japanese around <b>March 2025</b> after
+                            discovering japanese music and anime.
+                        </b>
+                    </p>
+
+                    <p>
+                        as a korean speaker, <b
+                            >i find japanese relatively easy because the two
+                            languages share similar grammar and vocabulary
+                            roots.</b
+                        >
+                    </p>
+                </li>
+                <li>
+                    <h3>
+                        <img
+                            src="/assets/icons/countries/china.svg"
+                            alt="China Icon"
+                        />
+                        <div>
+                            chinese <span
+                                class="adaptive-text-shadow col orange"
+                                >(A2, HSK 1 ~ 2)</span
+                            >
+                        </div>
+                    </h3>
+
+                    <div class="content">
+                        <p>
+                            i started learning chinese in around <b
+                                >early 2026</b
+                            > as another way to explore languages.
+                        </p>
+
+                        <p>
+                            i actually used to be HSK 3 when i was younger, but
+                            forgot most of it due to dismotivation.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <h3>
+                        <img
+                            src="/assets/icons/countries/spain.svg"
+                            alt="Spain Icon"
+                        />
+                        <div>
+                            spanish <span class="adaptive-text-shadow col red"
+                                >(A2)</span
+                            >
+                        </div>
+                    </h3>
+
+                    <p>
+                        <b
+                            >spanish was the first romance language I ever
+                            started learning.</b
+                        >
+                        although i am still a beginner, i find the contrast between
+                        spanish and english pretty interesting.
+                    </p>
+                </li>
+            </ul>
 
             <p>
                 <b>
-                    I started learning Japanese around <b>March 2025</b> after discovering
-                    Japanese music and anime.
+                    i'm willing to help anyone learn or practice any of the
+                    languages listed above,
                 </b>
+                especially korean, english and japanese.
+                <i>i'm not really the best at teaching, though.</i> :c
+            </p>
+
+            <p>but that's not all; i also love linguistics!</p>
+
+            <p>
+                <b>
+                    i love studying grammar, pronunciation, writing systems, and
+                    other aspects of linguistics.
+                </b>
+                i like exploring how languages work because i want to help others
+                learn languages in more efficient ways.
             </p>
 
             <p>
-                As a Korean speaker I find Japanese relatively easy because the
-                two languages share similar grammar and vocabulary roots.
+                i also occasionally spend my time making conlangs. most of them
+                are dead, duh.
             </p>
-        </li>
-        <li>
-            <h3>
-                <img src="/assets/icons/countries/china.svg" alt="China Icon" />
-                <div>
-                    Chinese <span class="adaptive-text-shadow col orange"
-                        >(A2, HSK 1 ~ 2)</span
-                    >
+        </section>
+    </details>
+
+    <details id="media" class="collapsible">
+        <summary> i'm into a lot of medias and stuff! </summary>
+
+        <section class="content">
+            <details class="dim-detail" class:hidden={!boundaryShatter}>
+                <summary> content warning </summary>
+
+                <div class="content">
+                    <p>
+                        i also have pretty unusual interests, including
+                        <b>gore (and violence in general) and vore. </b>
+                    </p>
+
+                    <p>
+                        although i'm not generally good at handling scary stuff,
+                        i do enjoy some horror. if only gore didn't have horror
+                        elements...
+                    </p>
                 </div>
-            </h3>
+            </details>
+
+            <h1>anime & shows</h1>
 
             <p>
-                I started learning Chinese around <b>early 2026</b> as another way
-                to explore languages and expand my understanding of East Asian languages.
+                i enjoy watching stuff in my free time! but like, i've been
+                running out of free time itself, hmmm...
             </p>
-        </li>
-        <li>
-            <h3>
-                <img src="/assets/icons/countries/spain.svg" alt="Spain Icon" />
-                <div>
-                    Spanish <span class="adaptive-text-shadow col red"
-                        >(A1)</span
-                    >
-                </div>
-            </h3>
+
+            <p>my favorite genres of anime include:</p>
+
+            <ul>
+                <li>comedy! :D</li>
+                <li>tragedy! :C</li>
+                <li>romance in general, especially yuri!</li>
+                <li>slice of <s class="dim">cheesecake</s> life!</li>
+            </ul>
+
+            <p>i also enjoy watching object shows.</p>
+
+            <h1>music</h1>
 
             <p>
-                <b
-                    >Spanish was the first Romance language I ever started
-                    learning.</b
+                <b>i always listen to music when programming or studying.</b>
+                it helps me lock in.
+            </p>
+
+            <ul>
+                <li>
+                    <b>i love japanese music!</b> whether it'd be j-pop, vocaloid
+                    or anime music i enjoy listening to them.
+                </li>
+                <li>
+                    <b>i like electronic music and game OSTs!</b> mostly because they've
+                    been a huge part of my childhood.
+                </li>
+            </ul>
+
+            <h1>gaming</h1>
+
+            <p>
+                <b>
+                    i play games especially when i'm tired, as a way to relax
+                    and just have fun.
+                </b> i don't really take gaming competitively or seriously, though.
+            </p>
+
+            <h2>rhythm games</h2>
+
+            <p>
+                <b>rhythm games are actually my favorite type of games!</b><br
+                />
+                i really don't know why, maybe i just like mashing my keyboard until
+                it breaks?
+            </p>
+
+            <div class="stacks">
+                <div
+                    class="stack"
+                    title="no bro it's not tap tap tap TAP tap it's actually tap tap TAP tap tap"
                 >
-                Although I am still a beginner, I find it interesting to explore a
-                language with a very different structure and history from the ones
-                I already know.
+                    A Dance of
+                    <span class="col bright red">Fire</span> and
+                    <span class="col bright blue">Ice</span>
+                </div>
+                ⬩
+                <div
+                    class="stack"
+                    title="click the rhombicosidodecahedrons        to the beat"
+                >
+                    <span class="col bright magenta">osu!</span>
+                </div>
+                ⬩
+                <div class="stack" title="PHENOMENAL game btw. life/changing">
+                    <span style="color: #ff0070">vivid</span>/<span
+                        style="color: #00ffff">stasis</span
+                    >
+                </div>
+            </div>
+
+            <h2>idle games</h2>
+
+            <p>
+                tbf idle games are way too underrated. i like growth&trade; and
+                BIG numbers.
             </p>
-        </li>
-    </ul>
 
-    <p>
-        <b>
-            I'm willing to help anyone learn or practice any of the languages
-            listed above,
-        </b>
-        especially Korean, English and Japanese.
-        <i>Though, please do note that I'm not really the best at teaching.</i>
-    </p>
+            <div class="stacks">
+                <div
+                    class="stack col bright cyan"
+                    title="haha number go up simulator go brrr"
+                >
+                    Antimatter Dimensions
+                </div>
+                ⬩
+                <div class="stack col bright blue">Cell to Singularity</div>
+                ⬩
+                <div class="stack col bright orange">Idle Slayer</div>
+            </div>
 
-    <p>
-        I am also interested in learning languages such as
+            <h2>platformer games</h2>
 
-        <b> German, Dutch and Greek </b>.
-    </p>
+            <p>
+                platformer games are really fun to grind and get better at.<br
+                />
 
-    <h1>Linguistics</h1>
+                <span class="dim small">
+                    yes, i consider Geometry Dash to be a platformer game.
+                    whatever
+                </span>
+            </p>
 
-    <p>
-        <b>
-            I love studying grammar, pronunciation, writing systems, and other
-            aspects of linguistics.
-        </b>
-        I want to explore how languages work, and furthermore help other people learn
-        languages as well. I've probably spent way too much time analyzing English
-        grammar.
-    </p>
+            <div class="stacks">
+                <div
+                    class="stack col bright yellow"
+                    title="duh duh duh duh dudududududududu- GEOMETRY DASH *epic drop*"
+                >
+                    Geometry Dash
+                </div>
+                ⬩
+                <div
+                    class="stack col bright red"
+                    title="omg it peak platformer gaem!!"
+                >
+                    Celeste
+                </div>
+            </div>
 
-    <p>I also occasionally spend my time making conlangs.</p>
+            <h2>other games</h2>
+
+            <div class="stacks">
+                <div class="stack col green" title="creeper aww mann">
+                    Minecraft
+                </div>
+                ⬩
+                <div
+                    class="stack col bright black"
+                    title="Lan lan man. The sixteenth developer, lying hidden somewhere in this website. The one they call the Ultimate Procrastinator. Watch out for him."
+                >
+                    Danganronpa
+                </div>
+            </div>
+        </section>
+    </details>
+
+    <details id="science" class="collapsible">
+        <summary> i like science! </summary>
+
+        <section class="content">
+            <div class="stacks">
+                <div class="stack col blue">astronomy</div>
+                ⬩
+                <div class="stack col purple">physics</div>
+                ⬩
+                <div class="stack col green">chemistry</div>
+                ⬩
+                <div class="stack col orange">thermodynamics</div>
+            </div>
+
+            <p>
+                i enjoy studying most branches of science, but i especially find <b
+                    >astronomy, physics, and chemistry</b
+                > the best.
+            </p>
+
+            <p>
+                <b>
+                    i have been interested in astronomy since i was very young.
+                </b> it eventually led me towards physics. i enjoy learning about
+                the principles that govern how the world works.
+            </p>
+        </section>
+    </details>
+
+    <details id="math" class="collapsible">
+        <summary> i like math! </summary>
+
+        <section class="content">
+            <p>
+                i <i>really</i> enjoy solving math problems in my free time,
+                <b>especially calculus and geometry.</b> calculus my beloved lmao
+            </p>
+
+            <p>
+                <b>i have experience with writing LaTeX notes and proofs.</b>
+                i've created multiple math-related animations and demonstrations using
+                a Python library called <code>manim</code>.
+            </p>
+        </section>
+    </details>
 </section>
-
+<!--
 <section id="other-interests">
-    <h1>Other Interests</h1>
-
-    <h2>Science</h2>
-
-    <div class="stacks">
-        <div class="stack col blue">Astronomy</div>
-        ⬩
-        <div class="stack col purple">Physics</div>
-        ⬩
-        <div class="stack col green">Chemistry</div>
-        ⬩
-        <div class="stack col orange">Thermodynamics</div>
-    </div>
-
-    <p>
-        I enjoy studying most branches of science, but I especially like <b
-            >astronomy, physics, and chemistry.</b
-        >
-    </p>
-
-    <p>
-        <b>I have been interested in astronomy since I was very young.</b> That interest
-        eventually led me towards physics. I enjoy learning about the principles that
-        govern how the world works.
-    </p>
-
-    <h2>Math</h2>
-
-    <p>
-        <b>
-            I <i>really</i> enjoy solving math problems in my free time, especially
-            calculus and geometry.
-        </b>
-    </p>
-
-    <p>
-        I have experience with writing LaTeX notes and proofs. Also, as
-        mentioned earlier, I've created multiple math-related animations and
-        demonstrations using a Python library called <code>manim</code>.
-    </p>
-
     <h2>Making Videos</h2>
 
     <p>
@@ -683,77 +982,6 @@
         inner jokes and memes you'll probably NEVER understand but I
         <i>occasionally</i> make quality content.
     </p>
-
-    <h2>Gaming</h2>
-
-    <p>
-        <b>
-            I play games especially when I'm tired, as a way to relax and just
-            have fun.
-        </b>
-        I usually like playing chill games.
-    </p>
-
-    <div class="stacks">
-        <div
-            class="stack col bright cyan"
-            title="haha number go up simulator go brrr"
-        >
-            Antimatter Dimensions
-        </div>
-        ⬩
-        <div class="stack col bright blue">Cell to Singularity</div>
-        ⬩
-        <div class="stack col bright orange">Idle Slayer</div>
-    </div>
-
-    <div class="stacks">
-        <div
-            class="stack"
-            title="no bro it's not tap tap tap TAP tap it's actually tap tap TAP tap tap"
-        >
-            A Dance of
-            <span class="col bright red">Fire</span> and
-            <span class="col bright blue">Ice</span>
-        </div>
-        ⬩
-        <div
-            class="stack"
-            title="click the rhombicosidodecahedrons        to the beat"
-        >
-            <span class="col bright magenta">osu!</span>
-        </div>
-        ⬩
-        <div class="stack" title="PHENOMENAL game btw. life/changing">
-            <span style="color: #ff0070">vivid</span>/<span
-                style="color: #00ffff">stasis</span
-            >
-        </div>
-    </div>
-
-    <div class="stacks">
-        <div
-            class="stack col bright yellow"
-            title="duh duh duh duh dudududududududu- GEOMETRY DASH *epic drop*"
-        >
-            Geometry Dash
-        </div>
-        ⬩
-        <div class="stack col bright red" title="omg it peak platformer gaem!!">
-            Celeste
-        </div>
-    </div>
-
-    <div class="stacks">
-        <div class="stack col green" title="creeper aww mann">Minecraft</div>
-        ⬩
-        <div
-            class="stack col bright black"
-            title="Lan lan man. The sixteenth developer, lying hidden somewhere in this website. The one they call the Ultimate Procrastinator. Watch out for him."
-        >
-            Danganronpa
-        </div>
-    </div>
 
     <h2>Other Interests</h2>
 
@@ -773,109 +1001,81 @@
         </li>
         <li><b>Watching anime.</b> yuri is so peak i swear</li>
     </ul>
-</section>
-
-<section id="projects">
-    <h1>What I Make</h1>
-
-    <p>
-        <b>
-            I enjoy building things that let me turn my ideas into something
-            tangible.
-        </b><br />
-        Most of what I make involves programming, including websites, tools, experiments
-        and smaller projects.
-    </p>
-
-    <p>
-        I also enjoy creating videos and occasionally conlangs in my free time.
-        For information about my projects, consider checking the dedicated
-        <a href="/projects">projects</a> page out!
-    </p>
-</section>
+</section> -->
 
 <section id="trivia">
     <h1>Trivia</h1>
 
     <p>
-        Want to learn something random about me?<br />
-        <b>Click the button below!</b>
+        if want to learn something random about me, then
+        <b>click the button below!</b>
     </p>
 
-    <button onclick={pickTrivia}>Generate Trivia</button>
+    <button onclick={pickTrivia}>generate trivia</button>
 
     <p class="quote {triviaType}">
-        {#if triviaType === "normal"}<b>Did you know?</b><br />{/if}
+        {#if triviaType === "normal"}<b>did you know?</b><br />{/if}
         {@html trivia}
     </p>
 </section>
 
 <style lang="css">
-    #intro-bg {
-        background-image: url("/assets/backgrounds/strawberry-jam.jpg");
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
-    }
-
     #intro {
         background: rgba(0, 0, 0, 0.6);
     }
 
-    #intro .header {
-        text-align: center;
+    #intro .card {
+        align-self: flex-start;
+
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
-        gap: 2em;
+        gap: 2rem;
+        padding: 2rem;
+
+        background: black;
     }
 
-    #intro .header .profile {
-        max-width: 7.5em;
-        max-height: 7.5em;
-        border-radius: 2147483647em;
+    #intro .card .wrapper {
+        border: 4px solid rgb(219, 194, 255);
+        box-shadow:
+            0 0 20px rgb(91, 4, 179),
+            inset 0 0 20px rgb(91, 4, 179);
+        padding: 0.5rem;
+        line-height: 0;
     }
 
-    #intro .header .name-group {
-        text-align: left;
+    #intro .card .wrapper .profile {
+        max-width: 7.5rem;
+        max-height: 7.5rem;
     }
 
-    #intro .header .name-group .name {
-        position: relative;
-        color: white;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        font-size: 2.5em;
-        line-height: 1.25;
+    #intro .card .wrapper .profile:hover {
+        transform: scale(0.95);
         cursor: pointer;
     }
 
-    #intro .header .name-group .name::after {
-        content: "";
-        position: absolute;
-
-        left: 0;
-        bottom: 2px;
-        height: 0.06em;
-        background: white;
-
-        width: 0%;
-        opacity: 0;
-        transition: 0.5s ease;
+    #intro .card .group {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0.25rem;
     }
 
-    #intro .header .name-group .name:hover::after {
-        width: 100%;
-        opacity: 1;
+    #intro .card .group .name {
+        position: relative;
+        color: white;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: 0.1rem;
     }
 
-    #intro .header .name-group .handle {
-        color: rgba(255, 255, 255, 0.75);
-    }
-
-    #intro .description {
-        padding: 0 5%;
+    #intro .card .group .handle {
+        opacity: 0.75;
     }
 
     #bio {
@@ -888,14 +1088,22 @@
     }
 
     #bio > h1 {
-        font-size: 1.5em;
+        font-size: 1.5rem;
     }
 
     #bio > h1 .col {
         font-size: 1.25em;
     }
 
-    #tech-bg {
+    .dim-detail > summary {
+        opacity: 0.05;
+    }
+
+    .dim-detail > summary:hover {
+        opacity: 0.1;
+    }
+
+    #tech {
         background-image: url("/assets/backgrounds/vscodium.png");
         background-position: center center;
         background-repeat: no-repeat;
@@ -903,19 +1111,19 @@
         background-attachment: fixed;
     }
 
-    #tech {
+    #tech > .content {
         background: rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(2px);
         color: rgba(240, 240, 255, 0.75);
     }
 
-    #tech b {
+    #tech > .content b {
         color: rgba(230, 230, 255, 0.8);
     }
 
-    #tech h1,
-    #tech h2,
-    #tech h3 {
+    #tech > .content h1,
+    #tech > .content h2,
+    #tech > .content h3 {
         color: rgba(220, 220, 255, 0.9);
     }
 
@@ -925,18 +1133,18 @@
         align-items: center;
         justify-content: flex-start;
         flex-wrap: wrap;
-        gap: 1em;
+        gap: 1rem;
         color: #444;
 
-        padding: 0 2em;
+        padding: 0 2rem;
         text-shadow: 0 0 20px
             oklch(from currentColor calc(l * 0.7) calc(c * 2) calc(h + 10));
     }
 
     .stacks .stack {
         font-family: "JetBrains Mono";
-        font-size: 1em;
-        letter-spacing: 0.15em;
+        font-size: 1rem;
+        letter-spacing: 0.15rem;
         font-weight: 400;
         color: white;
 
@@ -967,9 +1175,6 @@
     .stacks .stack.html {
         color: #e44d26;
     }
-    .stacks .stack.php {
-        color: #6e81b6;
-    }
     .stacks .stack.python {
         color: #387eb8;
     }
@@ -980,13 +1185,9 @@
         color: #a04f12;
     }
 
-    #languages {
+    #languages .content {
         background: rgb(0, 0, 20);
         box-shadow: inset 0 0 50px rgba(9, 30, 71, 0.75);
-    }
-
-    #languages * {
-        z-index: 2000;
     }
 
     .word-cloud {
@@ -1014,43 +1215,12 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 0.5em;
+        gap: 0.5rem;
     }
 
     #languages ul li h3 img {
-        width: 1.5em;
-        height: 1.5em;
-    }
-
-    #other-interests {
-        background: rgb(0, 0, 20);
-        background:
-            radial-gradient(
-                circle at 30% 30%,
-                rgba(115, 0, 255, 0.1),
-                transparent
-            ),
-            radial-gradient(
-                circle at 70% 70%,
-                rgba(0, 238, 255, 0.05),
-                transparent
-            ),
-            black;
-    }
-
-    #projects {
-        background:
-            radial-gradient(
-                circle at top left,
-                rgba(115, 0, 255, 0.2),
-                transparent 50%
-            ),
-            radial-gradient(
-                circle at bottom right,
-                rgba(0, 238, 255, 0.2),
-                transparent 50%
-            ),
-            black;
+        width: 1.5rem;
+        height: 1.5rem;
     }
 
     #trivia {
@@ -1079,7 +1249,7 @@
     #trivia button {
         background: white;
         color: #111;
-        padding: 0.5em 1em;
+        padding: 0.5em 1rem;
         border: 2px solid white;
         border-radius: 200px;
 
@@ -1106,5 +1276,28 @@
         opacity: 0.95;
         color: var(--bright-yellow);
         text-shadow: 0 0 20px var(--yellow);
+    }
+
+    :global(html.shake) {
+        animation: shake 150ms ease-in-out;
+    }
+
+    @keyframes shake {
+        0%,
+        100% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+        20% {
+            transform: translate(-5px, 2px) rotate(0.5deg);
+        }
+        40% {
+            transform: translate(5px, -2px) rotate(-0.5deg);
+        }
+        60% {
+            transform: translate(-4px, -2px) rotate(0.5deg);
+        }
+        80% {
+            transform: translate(4px, 2px) rotate(-0.5deg);
+        }
     }
 </style>

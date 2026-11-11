@@ -1,18 +1,14 @@
 <script lang="ts">
-    import { Ia } from "$lib/components/Links";
-
-    export const metadata = {
-        title: "Overly Overhauled Overlays",
-        published: new Date("2026-07-29T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h1>v26.27.0: Overly Overhauled Overlays</h1>
-
-    <p class="dim">
-        Release date: <b>July 29th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-27-0"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
@@ -36,7 +32,7 @@
             <span class="col bright green">+</span>
             Added a link to
             <Ia href="https://www.lanzoor.xyz" external>core-xyz</Ia>
-            within the <a href="/projects">projects</a> page.
+            within the <Ia href="/projects">projects</Ia> page.
         </li>
         <li>
             <span class="col bright green">+</span>
@@ -45,7 +41,7 @@
         <li>
             <span class="col bright green">+</span>
             Added back several legacy pages, including
-            <a href="/legacy/profile-old">the old profile</a>.
+            <Ia href="/legacy/profile-old">the old profile</Ia>.
         </li>
         <li>
             <span class="col bright green">+</span><span
@@ -70,7 +66,7 @@
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Completely overhauled the <a href="/projects">projects page</a>.
+            Completely overhauled the <Ia href="/projects">projects page</Ia>.
         </li>
         <li>
             <span class="col bright yellow">~</span>
@@ -87,7 +83,7 @@
         </li>
         <li>
             <span class="col bright red">-</span>
-            Removed irrelevant styles from the <a href="/">front page</a>.
+            Removed irrelevant styles from the <Ia href="/">front page</Ia>.
         </li>
     </ul>
 </section>

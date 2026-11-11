@@ -1,25 +1,24 @@
 <script lang="ts">
-    export const metadata = {
-        published: new Date("2026-08-14T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.28.1</h2>
-
-    <p class="dim">
-        Release date: <b>August 14th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-28-1"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
             <span class="col bright purple">ƒ</span>
-            Fixed an issue where links within the <a href="/tools">tools</a> page
+            Fixed an issue where links within the <Ia href="/tools">tools</Ia> page
             wouldn't work.
         </li>
         <li>
             <span class="col bright green">+</span>
-            Added the <a href="/tools/number-formatter">Number Formatter</a> tool.
+            Added the <Ia href="/tools/number-formatter">Number Formatter</Ia> tool.
         </li>
     </ul>
 </section>

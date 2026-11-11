@@ -1,7 +1,9 @@
 <script lang="ts">
-    import { navigationOverlay, warpOverlay } from "$lib/overlays.svelte";
+    import { navigationOverlay } from "#lib/overlays.svelte.js";
     import { onMount } from "svelte";
-    import { Ia } from "../Links";
+    import { Ba, Ia } from "../Links";
+    import { formatDateTime } from "#lib";
+    import { LzMeta } from "#lib/metadata.ts";
 
     onMount(() => {
         const listener = (event: KeyboardEvent) => {
@@ -24,109 +26,45 @@
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div class="bg" onclick={() => (navigationOverlay.open = false)}>
         <div
-            class="panel enable-spacing"
+            class="panel enable-layout"
             onclick={(event) => event.stopPropagation()}
         >
-            <div class="header">
-                <h1 class="logo">
-                    <span class="head">lanzoor</span>.<span class="tail"
-                        >dev</span
-                    >
-                </h1>
+            <div class="header enable-layout">
+                <Ba href="/">
+                    <h1 class="logo">
+                        <span class="head">lanzoor</span>.<span class="tail"
+                            >dev</span
+                        >
+                    </h1>
+                </Ba>
 
-                <button onclick={() => (navigationOverlay.open = false)}>
-                    <img src="/assets/icons/close.svg" alt="x" />
-
-                    <p class="mobile-failsafe">Close</p>
-                </button>
+                <p>
+                    a small website maintained by Lapis Lanzuli,<br />
+                    including projects, showcases, documents, and more!
+                </p>
             </div>
-            <hr />
-            <nav class="links">
-                <ul>
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="/map">Site Map</a>
-                    </li>
-                    <li>
-                        <details open>
-                            <summary> Meta </summary>
-                            <ul>
-                                <li>
-                                    <a href="/about">About</a>
-                                </li>
-                                <li>
-                                    <a href="/contact">Contact</a>
-                                </li>
-                                <li>
-                                    <a href="/credits">Credits</a>
-                                </li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li>
-                        <details open>
-                            <summary> Legal </summary>
-                            <ul>
-                                <li>
-                                    <a href="/legal">About</a>
-                                </li>
-                                <li>
-                                    <a href="/legal/privacy">Privacy Policy</a>
-                                </li>
-                                <li>
-                                    <a href="/legal/terms">Terms Of Service</a>
-                                </li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li>
-                        <details open>
-                            <summary> Projects </summary>
-                            <ul>
-                                <li>
-                                    <a href="/projects">Projects Portal</a>
-                                </li>
-                                <li>
-                                    <a href="/tools">Tools</a>
-                                </li>
-                                <li>
-                                    <Ia
-                                        external
-                                        href="https://www.youtube.com/@lanzoormakesvideos"
-                                    >
-                                        Videos
-                                    </Ia>
-                                </li>
-                                <li>
-                                    <a href="/conlangs">Conlangs</a>
-                                </li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li>
-                        <details open>
-                            <summary> Documents </summary>
-                            <ul>
-                                <li>
-                                    <a href="/docs">Document Portal</a>
-                                </li>
-                                <li>
-                                    <a href="/blog">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="/conventions">Conventions</a>
-                                </li>
-                            </ul>
-                        </details>
-                    </li>
-                </ul>
-            </nav>
 
-            <button class="open-warp" onclick={() => (warpOverlay.open = true)}
-                >Open Warp Panel</button
-            >
+            <hr />
+
+            <nav class="links enable-layout">
+                <h3>⬩ links ⬩</h3>
+
+                <div class="group">
+                    <Ia href="/">home</Ia>
+                    <Ia href="/profile">profile</Ia>
+                    <Ia href="/about">about</Ia>
+                    <Ia href="/projects">projects</Ia>
+                    <Ia href="/docs">documents</Ia>
+                    <Ia href="/blog">blog</Ia>
+                </div>
+
+                <p class="footer">
+                    <Ia href={LzMeta.changelog}>{LzMeta.version}</Ia> ⬩ last updated
+                    at
+                    <b>{formatDateTime(LzMeta.lastUpdated)}</b><br />
+                    <b>© 2026 Lapis Lanzuli</b> ⬩ Do not redistribute.
+                </p>
+            </nav>
         </div>
     </div>
 </div>
@@ -159,92 +97,45 @@
         position: fixed;
         inset: 0 0 0 auto;
         text-align: left;
-        background: rgba(0, 0, 0, 0.75);
+        background: black;
+        border-left: 2.5px solid rgb(224, 204, 255);
         min-width: 40%;
-        max-width: 100vw;
-        cursor: default;
+        max-width: 100%;
 
         padding: 1.5em;
+        overflow-y: auto;
     }
 
     #navigation .panel .header {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 2em;
+        text-align: center;
+        padding: 0 2rem;
     }
 
-    #navigation .panel .header * {
-        padding: 0;
-        margin: 0;
+    #navigation .panel .header h1 {
+        font-size: 2.5rem;
     }
 
-    #navigation .panel .header img {
-        max-width: 2em;
-        max-height: 2em;
-
-        transition: filter 200ms ease;
-    }
-
-    #navigation .panel .header img:hover {
-        filter: drop-shadow(0 0 10px #bbb);
-    }
-    #navigation .panel .header button {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5em;
-    }
-    #navigation .panel .header button .mobile-failsafe {
-        display: none;
-    }
-    #navigation .panel .header button:hover {
-        cursor: pointer;
-    }
-
-    #navigation .panel .header .logo {
-        font-size: 1.5em;
+    #navigation .panel .header p {
+        font-size: 0.9rem;
     }
 
     #navigation .panel .links {
-        overflow-y: auto;
-    }
-    #navigation .panel .links ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    #navigation .panel .links li:not(:has(details))::before {
-        content: "- ";
-    }
-    #navigation .panel .links li details > summary {
-        user-select: none;
-    }
-    #navigation .panel .links li details > ul {
-        padding: 0 1em 0.5em 1em;
-    }
-    #navigation .panel .links li {
-        padding: 0.1em 0;
+        padding: 0 2rem;
     }
 
-    @media (max-width: 480px) {
-        #navigation .panel .header {
-            flex-direction: column;
-            align-items: flex-start;
-        }
+    #navigation .panel .links .group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
 
-        #navigation .panel .header img {
-            width: 1.5em;
-            height: 1.5em;
-        }
+        background: #1a0f25;
+        padding: 2rem;
+        border: 2px solid rgb(150, 100, 255);
+    }
 
-        #navigation .panel .header button .mobile-failsafe {
-            display: inline-block;
-        }
-
-        #navigation .panel .open-warp {
-            display: none;
-        }
+    #navigation .panel .footer {
+        text-align: center;
+        opacity: 0.8;
+        font-size: 0.8rem;
     }
 </style>

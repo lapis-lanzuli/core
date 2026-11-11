@@ -1,41 +1,51 @@
-<script>
-    import { Ia } from "$lib/components/Links";
-    import Breadcrumbs from "$lib/components/Navigation/Breadcrumbs.svelte";
-    import { getPageData } from "$lib/map";
+<script lang="ts">
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import type { LzMetadata } from "#lib/metadata.js";
+
+    export const metadata: LzMetadata = {
+        title: "projects",
+        description: "a showcase of the projects that i've been working on.",
+    };
 </script>
 
 <section id="projects">
-    <Breadcrumbs />
+    <Meta {metadata} />
 
-    <h1>Featured Projects</h1>
+    <p>here is a showcase of some projects that i've been working on.</p>
 
-    <p>Here are some projects that I've been working on.</p>
+    <p>
+        <b>
+            the reason why you don't see many projects here is because i've been
+            working on this very website for a very long time.
+        </b>
+
+        i do plan to return to actual project creation in around
+        <b>january 2027</b>.
+    </p>
 
     <div id="container">
         <div class="project">
-            <div class="header">
-                <div class="status complete">complete</div>
-
-                <h1>core</h1>
-            </div>
+            <h1>core</h1>
 
             <p class="description">
-                The frontend source code for lanzoor.dev, which is the website
+                the frontend source code for lanzoor.dev, which is the website
                 you're looking at right now.
             </p>
 
             <div class="information">
-                <div class="tags">
+                <div class="data">
                     <div class="tag frontend">frontend</div>
                     <div class="tag webpage">webpage</div>
+                    <div class="status complete">complete</div>
                 </div>
 
                 <div class="links">
                     links:
 
-                    <a href="/"> project </a>
-                    <a href="/projects/core/changelog"> changelog </a>
-                    <Ia href="https://github.com/Lanzoor/core" external
+                    <Ia href="/">project</Ia>
+                    <Ia href="/changelog">changelog</Ia>
+                    <Ia href="https://github.com/lapis-lanzuli/core" external
                         >source</Ia
                     >
                 </div>
@@ -43,115 +53,76 @@
         </div>
 
         <div class="project">
-            <div class="header">
-                <div class="status wip">wip</div>
-
-                <h1>core-api</h1>
-            </div>
+            <h1>core-archive</h1>
 
             <p class="description">
-                The source code for api.lanzoor.dev, which powers the backend of
-                this site.
+                an archive / alternative website containing previous documents
+                related to me that are no longer actively maintained.
             </p>
 
             <div class="information">
-                <div class="tags">
-                    <div class="tag backend">backend</div>
-                    <div class="tag webpage">webpage</div>
-                </div>
-
-                <div class="links">
-                    links:
-
-                    <Ia href="https://api.lanzoor.dev" external>project</Ia>
-                    <Ia href="/projects/core-api/changelog" external
-                        >changelog</Ia
-                    >
-                    <Ia href="https://github.com/Lanzoor/core-api" external
-                        >source</Ia
-                    >
-                </div>
-            </div>
-        </div>
-
-        <div class="project">
-            <div class="header">
-                <div class="status complete">complete</div>
-
-                <h1>core-archive</h1>
-            </div>
-
-            <p class="description">
-                An archive containing previous documents related to me that are
-                no longer actively maintained.
-            </p>
-
-            <div class="information">
-                <div class="tags">
+                <div class="data">
                     <div class="tag frontend">frontend</div>
                     <div class="tag webpage">webpage</div>
+                    <div class="status complete">complete</div>
                 </div>
 
                 <div class="links">
                     links:
 
                     <Ia href="https://archive.lanzoor.dev" external>project</Ia>
-                    <Ia href="https://github.com/Lanzoor/core-archive" external
-                        >source</Ia
+                    <Ia
+                        href="https://github.com/lapis-lanzuli/core-archive"
+                        external>source</Ia
                     >
                 </div>
             </div>
         </div>
 
         <div class="project">
-            <div class="header">
-                <div class="status wip">wip</div>
-
-                <h1>kagipass</h1>
-            </div>
+            <h1>kagipass</h1>
 
             <p class="description">
-                Generate deterministic, strong passwords using the kagipass
-                algorithm.
+                generate deterministic, strong passwords using the kagipass
+                algorithm
             </p>
 
             <div class="information">
-                <div class="tags">
+                <div class="data">
                     <div class="tag program">program</div>
                     <div class="tag cli">cli</div>
+                    <div class="status wip">wip</div>
                 </div>
 
                 <div class="links">
                     links:
 
-                    <Ia href="https://github.com/Lanzaforge/kagipass" external
-                        >source</Ia
+                    <Ia
+                        href="https://github.com/lapis-lanzuli/kagipass"
+                        external>source</Ia
                     >
                 </div>
             </div>
         </div>
 
         <div class="project">
-            <div class="header">
-                <div class="status complete">complete</div>
-
-                <h1>BHOJ <span class="dim">(Bro Had One Job)</span></h1>
-            </div>
+            <h1>BHOJ <span class="dim">(Bro Had One Job)</span></h1>
 
             <p class="description">
-                An esoteric programming language compiler, written in Python.
+                an esoteric programming language compiler written in python
             </p>
 
             <div class="information">
-                <div class="tags">
+                <div class="data">
                     <div class="tag program">program</div>
                     <div class="tag cli">cli</div>
+                    <div class="status complete">complete</div>
                 </div>
 
                 <div class="links">
                     links:
 
-                    <Ia href="https://github.com/Lanzoor/BHOJ" external
+                    <Ia href="https://github.com/lapis-lanzuli/BHOJ" external
                         >source</Ia
                     >
                 </div>
@@ -160,14 +131,15 @@
     </div>
 
     <p>
-        For archived projects (such as <code>periodica</code> and
-        <code>profile-old</code>), please refer to
-        <Ia href="https://legacy.lanzoor.dev" external>legacy.lanzoor.dev</Ia>.
+        for archived projects (such as <code>periodica</code> and
+        <code>profile-old</code>), refer to
+        <Ia href="https://archive.lanzoor.dev" external>archive.lanzoor.dev</Ia
+        >.
     </p>
 </section>
 
-<section id="portal">
-    <h1>Projects Portal</h1>
+<!-- <section id="portal">
+    <h1>projects portal</h1>
 
     <p>
         There's also a plenty of projects hosted directly within this website.
@@ -175,19 +147,18 @@
 
     <ul>
         <li>
-            <a href="/tools">Tools</a> - {getPageData("/tools")?.description}
+            <Ia href="/tools">Tools</Ia>
         </li>
 
         <li>
-            <a href="/conlangs">Conlangs</a> - {getPageData("/conlangs")
-                ?.description}
+            <Ia href="/conlangs">Conlangs</Ia>
         </li>
 
         <li>
-            <a href="/games">Games</a> - {getPageData("/games")?.description}
+            <Ia href="/games">Games</Ia>
         </li>
     </ul>
-</section>
+</section> -->
 
 <style lang="css">
     :root {
@@ -217,14 +188,10 @@
         background: var(--projects-bg);
     }
 
-    #portal {
-        background: black;
-    }
-
     #container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(750px, 1fr));
-        gap: 3em;
+        display: flex;
+        flex-direction: column;
+        border-radius: 1em;
 
         width: 100%;
         margin: 3em 0;
@@ -234,71 +201,17 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 2em;
+        gap: 1.25em;
 
         padding: 2em;
 
         background: rgb(6, 2, 11);
         border: 2px solid #222;
-        border-radius: 1em;
 
         transition: 500ms ease;
 
         position: relative;
         overflow: hidden;
-    }
-
-    .project .header {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5em;
-    }
-
-    .project .header h1 {
-        font-size: 1.75em;
-        letter-spacing: 0.05em;
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-
-        font-family: "JetBrains Mono";
-
-        transition: 200ms ease;
-    }
-
-    .project .header h1:hover {
-        letter-spacing: 0.1em;
-    }
-
-    .project .status {
-        background: #111;
-        padding: 0.3em 0.5em;
-        font-size: 0.75em;
-    }
-
-    .project .status::before {
-        content: "[ ";
-    }
-
-    .project .status::after {
-        content: " ]";
-    }
-
-    .project .status.complete {
-        color: var(--bright-green);
-        background: color-mix(in oklch, black, var(--bright-green) 25%);
-    }
-
-    .project .status.wip {
-        color: var(--bright-yellow);
-        background: color-mix(in oklch, black, var(--bright-yellow) 25%);
-    }
-
-    .project .description {
-        line-height: 1.6;
-        font-size: 0.8em;
-        max-width: 25em;
-
-        color: rgba(255, 255, 255, 0.7);
     }
 
     .project .information {
@@ -307,41 +220,50 @@
         align-items: flex-start;
         gap: 0.5em;
     }
-    .project .tags {
+    .project .data {
         display: flex;
         flex-wrap: wrap;
         gap: 1em;
-    }
 
-    .project .tags .tag {
         font-size: 0.8em;
         font-weight: 600;
-
-        color: #777;
         text-shadow: 0 0 20px
             oklch(from currentColor calc(l * 0.7) calc(c * 2) calc(h + 10));
     }
 
-    .project .tags .tag::before {
+    .project .tag::before {
         content: ">_ ";
-        color: #333;
+        color: #555;
         text-shadow: none;
     }
 
-    .project .tags .tag.backend {
+    .project .status::before {
+        content: "//";
+        color: #777;
+        text-shadow: none;
+    }
+
+    .tag.backend {
         color: var(--bright-orange);
     }
-    .project .tags .tag.frontend {
+    .tag.frontend {
         color: var(--bright-green);
     }
-    .project .tags .tag.webpage {
+    .tag.webpage {
         color: var(--bright-cyan);
     }
-    .project .tags .tag.program {
+    .tag.program {
         color: var(--bright-purple);
     }
-    .project .tags .tag.cli {
+    .tag.cli {
         color: var(--bright-magenta);
+    }
+
+    .status.complete {
+        color: var(--bright-green);
+    }
+    .status.wip {
+        color: var(--bright-yellow);
     }
 
     .project .links {

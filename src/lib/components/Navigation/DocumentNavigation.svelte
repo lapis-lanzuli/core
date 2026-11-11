@@ -7,10 +7,13 @@
         title?: string;
     };
 
-    let { previous, next } = $props<{
+    let {
+        previous,
+        next,
+    }: {
         previous?: DocumentNavLink;
         next?: DocumentNavLink;
-    }>();
+    } = $props();
 </script>
 
 <div class="-document-navigation">

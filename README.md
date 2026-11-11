@@ -7,9 +7,9 @@
 First, clone the repository:
 
 ```sh
-git clone https://github.com/Lanzoor/core.git
+git clone https://github.com/lapis-lanzuli/core.git
 # or by using the GitHub CLI:
-gh repo clone Lanzoor/core
+gh repo clone lapis-lanzuli/core
 ```
 
 ## Install

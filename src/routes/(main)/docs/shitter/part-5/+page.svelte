@@ -1,6 +1,6 @@
 <script>
     import shittyDrawing from "../assets/bruh.png";
-    import DocumentNavigation from "$lib/components/Navigation/DocumentNavigation.svelte";
+    import DocumentNavigation from "#lib/components/Navigation/DocumentNavigation.svelte";
 </script>
 
 <section>

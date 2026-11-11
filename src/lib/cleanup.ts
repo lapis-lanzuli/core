@@ -1,11 +1,20 @@
-import { LStorage } from "./storage";
+// this function is just supposed to cleanup localstorage keys that are now irrelevant
 
-const keysToRemove = ["hasSeenNotice", "isTrackingAllowed", "legalConf"];
+import { LzStorage } from "./storage";
+
+const keysToRemove = [
+    "hasSeenNotice",
+    "isTrackingAllowed",
+    "legalConf",
+    "acceptedLegalInfo",
+    "hasRefreshed",
+    "site-checkpoint",
+];
 
 export function cleanupOldData() {
     if (typeof window === "undefined") return;
 
     for (const key of keysToRemove) {
-        LStorage.remove(key);
+        LzStorage.remove(key);
     }
 }

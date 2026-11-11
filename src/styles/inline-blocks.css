@@ -2,20 +2,18 @@ code,
 kbd {
     display: inline-block;
     font-family: "JetBrains Mono";
-    padding: 4px 8px;
-    border-radius: 5px;
+    padding: 0 0.2rem;
+    border-radius: 0.15rem;
 }
 
 code {
     background: rgb(20, 13, 0);
     color: rgb(255, 220, 140);
-    padding: 2px 6px;
 }
 
 kbd {
     background: rgb(0, 18, 20);
     color: rgb(140, 249, 255);
-    padding: 2px 6px;
 }
 
 kbd.plain {
@@ -32,14 +30,14 @@ kbd.plain::after {
     content: ">";
 }
 
-a.-block-anchor,
+a.-ba,
 a.plain {
     color: inherit;
     cursor: pointer;
     text-decoration: none;
 }
 
-a:not(.-block-anchor) {
+a:not(.-ba) {
     text-decoration: none;
     display: inline-block;
 
@@ -48,20 +46,29 @@ a:not(.-block-anchor) {
     transition: color 0.2s ease;
 }
 
-a:not(.-block-anchor):hover {
+a:not(.-ba):hover {
     text-decoration: underline;
     color: #777;
 }
 
-main > section a:not(.block-anchor):not(.keep-color) {
+a.-ia:not(.keep-color) {
     color: var(--bright-purple);
 }
 
-main > section a:not(.block-anchor):not(.keep-color):hover {
+a.-ia:not(.keep-color):hover {
     color: var(--purple);
 }
 
 .ipa,
 .ipa * {
     color: var(--bright-purple);
+}
+
+a.disabled {
+    color: var(--bright-red) !important;
+    cursor: not-allowed !important;
+}
+
+a.disabled:hover {
+    color: var(--red) !important;
 }

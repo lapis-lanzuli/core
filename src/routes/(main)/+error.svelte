@@ -1,20 +1,71 @@
-<script>
+<script lang="ts">
     import { page } from "$app/state";
-    import { Ia } from "$lib/components/Links";
+    import { Ia } from "#lib/components/Links/index.js";
+    import type { LzMetadata } from "#lib/metadata.js";
+    import Meta from "#lib/components/Meta.svelte";
 
     let status = $state(page.status);
     let attemptedPath = $state(page.url?.pathname || "/");
+
+    let is5xxPreview = attemptedPath === "/5xx";
+    if (is5xxPreview) {
+        status = 500;
+    }
+
+    export const metadata: LzMetadata = {
+        title: "error",
+        description: "whoops! something unexpected happened...",
+        useEl: false,
+    };
+
+    const parentPath = $derived(page.url.pathname.replace(/\/[^/]+\/?$/, "/"));
 </script>
 
-<svelte:head>
-    <title>{status} Error | lanzoor.dev</title>
-</svelte:head>
+{#if status !== 404 || is5xxPreview}
+    <Meta {metadata} />
 
-{#if status === 404}
+    <section id="internal-error" class="stretched">
+        <p class="links">
+            <Ia href={parentPath ?? "../"}>../</Ia> ⬩
+            <Ia onclick={() => history.back()}>{"<<"}</Ia>
+            <Ia onclick={() => history.forward()}>{">>"}</Ia>
+        </p>
+
+        <header class="disable-layout">
+            <h1>{status}</h1>
+
+            <div class="separator"></div>
+
+            <h2>Internal error</h2>
+        </header>
+
+        <p>
+            <b>something went wrong while processing your request.</b><br />
+            the server encountered an unexpected error and could not complete the
+            request.
+        </p>
+
+        <p>
+            this error is extremely rare. this error is also most likely on our
+            end.<br />
+            <b>please feel free to <Ia href="/contact">get in touch</Ia>.</b>
+        </p>
+
+        {#if is5xxPreview}
+            <p class="dim">
+                you're currently previewing this error page on <code>/5xx</code
+                >.<br />
+                <b>the error did not actually happen.</b>
+            </p>
+        {/if}
+    </section>
+{:else if status === 404}
     <section id="error-404" class="stretched">
-        <a href="/" onclick={() => history.back()}>
-            {"<-"} Back
-        </a>
+        <p class="links">
+            <Ia href={parentPath ?? "../"}>../</Ia> ⬩
+            <Ia onclick={() => history.back()}>{"<<"}</Ia>
+            <Ia onclick={() => history.forward()}>{">>"}</Ia>
+        </p>
 
         <header class="disable-layout">
             <h1>404</h1>
@@ -26,50 +77,18 @@
 
         <p>
             <b>
-                We couldn't find a resource located at
-                <span class="col bright green">'{attemptedPath}'</span>.
+                sorry, we couldn't find a resource located at
+                <span class="col bright green">'{attemptedPath}'</span>!
             </b><br />
-            The filename may have changed, or the file may have been moved or removed.
+            the file might have been changed, moved or removed.
         </p>
 
         <p>
-            Try using the navigation panels above and below. You may also <Ia
+            try using the navigation panels above and below. you may also <Ia
                 href={attemptedPath}>try again</Ia
-            >.
-        </p>
-
-        {#if attemptedPath === "/404"}
-            <p class="dim">
-                This is a test message. You can indeed access this page through <code
-                    >/404</code
-                >.
-            </p>
-        {/if}
-    </section>
-{:else}
-    <section id="internal-error" class="stretched">
-        <a href="/" onclick={() => history.back()}>
-            {"<-"} Back
-        </a>
-
-        <header class="disable-layout">
-            <h1>{status}</h1>
-
-            <div class="separator"></div>
-
-            <h2>Internal Error</h2>
-        </header>
-
-        <p>
-            Something went wrong while processing your request.<br />
-            The server encountered an unexpected error and could not complete the
-            request.
-        </p>
-
-        <p>
-            This error is on our end. Please feel free to <a href="#connections"
-                >get in touch</a
-            >.
+            >.<br />
+            if you believe this is a mistake, feel free to
+            <Ia href="/contact">get in touch</Ia>.
         </p>
     </section>
 {/if}
@@ -199,7 +218,7 @@
         background: rgba(255, 255, 255, 0.25);
     }
 
-    section p {
+    section p:not(.links) {
         text-align: center;
     }
 </style>

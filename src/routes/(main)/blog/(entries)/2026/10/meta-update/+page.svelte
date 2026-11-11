@@ -1,25 +1,10 @@
-<script lang="ts" module>
-    import BlogBreadcrumbs from "$lib/components/Navigation/BlogBreadcrumbs.svelte";
-
-    export const metadata = {
-        title: "Meta Update",
-        description:
-            "An update regarding changes to myself as well as my digital identity.",
-        tags: ["personal", "announcement", "blog"],
-        published: new Date("2026-10-07T00:00:00+09:00"),
-    };
+<script lang="ts">
+    import Meta from "#lib/components/Meta.svelte";
+    import { blogMetadata } from "../../../metadata";
 </script>
 
-<svelte:head>
-    <title>{metadata.title}</title>
-
-    <meta name="tags" content={metadata.tags.join(", ")} />
-</svelte:head>
-
 <section>
-    <BlogBreadcrumbs />
-
-    <h1>Meta Update</h1>
+    <Meta metadata={blogMetadata["2026/10/meta-update"]} />
 
     <p>Hi,</p>
 
@@ -35,7 +20,8 @@
 
     <p>
         There were a couple of reasons for this. As I mentioned in <a
-            href="/blog/2026/07/alias-updates">07/alias-updates</a
+            href="/blog/2026/07/alias-updates"
+            class="disabled">07/alias-updates</a
         >, I felt that Lanzoor no longer represented me, and people frequently
         mispronounced my name. I've also received some criticism regarding my
         Japanese name, which contributed to my decision to change it.

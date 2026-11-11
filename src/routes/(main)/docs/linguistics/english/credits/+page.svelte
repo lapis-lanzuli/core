@@ -5,11 +5,12 @@
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
         "abcdefghijklmnopqrstuvwxyz" +
         "0123456789" +
-        "!@#$%^&*+=-_/\\|~`" +
-        "αβγδεζηθικλμνξοπρστυφχψω";
+        "!@#$%^&*()-=_+[]{}\\|,./<>?;':\"`~" +
+        "ΑαΒβΓγΔδΕεΖζΗηΘθΙιΚκΛλΜμΝνΞξΟοΠπΡρΣσςΤτΥυΦφΧχΨψΩω" +
+        "АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя";
 
     let el: HTMLSpanElement;
-    let name = "abcde"; // you're not supposed to actually see this
+    let name = "abcd efgh ij"; // you're not supposed to actually see this
 
     onMount(() => {
         const interval = setInterval(() => {
@@ -21,7 +22,7 @@
                         : chars[Math.floor(Math.random() * chars.length)],
                 )
                 .join("");
-        }, 10);
+        }, 200);
 
         return () => clearInterval(interval);
     });
@@ -29,7 +30,31 @@
 
 <section>
     <p>
-        Thank you <span class="cryptic" bind:this={el}>{name}</span>. Thank you
-        for everything. Please take care.
+        thank you <span class="cryptic" bind:this={el}>{name}</span>. thank you
+        for everything. you are the best. please take care.
     </p>
 </section>
+
+<style>
+    .cryptic {
+        text-shadow: 0 0 2rem white;
+        display: inline-block;
+
+        background: linear-gradient(
+            90deg,
+            hsl(0, 100%, 80%) 0%,
+            hsl(90, 100%, 80%) 25%,
+            hsl(180, 100%, 80%) 50%,
+            hsl(270, 100%, 80%) 75%,
+            hsl(360, 100%, 80%) 100%
+        );
+
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+
+        animation:
+            rainbow-scroll 4s linear infinite,
+            float 6s ease infinite;
+    }
+</style>

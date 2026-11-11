@@ -1,22 +1,14 @@
 <script lang="ts">
-    import { Ia } from "$lib/components/Links";
-
-    export const metadata = {
-        published: new Date("2026-10-19T00:00:00+09:00"),
-        // commit: "https://github.com/Lanzoor/core/commit/33f8959d280eab8b3190885965bcd905fcb5f139",
-    };
+    import { Ia } from "#lib/components/Links/index.ts";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.28.9</h2>
-
-    <p class="dim">
-        Release date: <b>October 19th, 2026</b><br />
-        <!-- Source: <Ia
-            href="https://github.com/Lanzoor/core/commit/33f8959d280eab8b3190885965bcd905fcb5f139"
-            external>github</Ia
-        > -->
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-28-9"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
@@ -32,7 +24,7 @@
 
         <li>
             <span class="col bright yellow">~</span>
-            Updated the <a href="/docs/shitter">Shitter docs</a>.
+            Updated the <Ia href="/docs/shitter">Shitter docs</Ia>.
         </li>
     </ul>
 </section>

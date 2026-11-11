@@ -1,28 +1,27 @@
 <script lang="ts">
-    export const metadata = {
-        published: new Date("2026-06-09T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.23.3</h2>
-
-    <p class="dim">
-        Release date: <b>June 9th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-23-3"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
             <span class="col bright green">+</span>
             Added a link to
-            <a href="https://status.lanzoor.dev"> core-status </a>
+            <Ia href="https://status.lanzoor.dev">core-status</Ia>
             within
-            <a href="/projects"> the projects page </a>.
+            <Ia href="/projects">the projects page</Ia>.
         </li>
         <li>
             <span class="col bright green">+</span>
             Added a changelog page at
-            <a href="/projects/core/changelog"> /projects/core/changelog </a>,
+            <Ia href="/projects/core/changelog">/projects/core/changelog</Ia>,
             which is exactly what you're looking at right now!
         </li>
         <li>
@@ -33,8 +32,8 @@
         <li>
             <span class="col bright yellow">~</span>
             <b>
-                Moved the <a href="/legacy/anti-JPA">anti-JPA project</a> to the legacy
-                category.
+                Moved the <Ia href="/legacy/anti-JPA">anti-JPA project</Ia> to the
+                legacy category.
             </b>
             This project will be archived for a while, and will be deleted eventually.
         </li>

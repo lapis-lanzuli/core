@@ -1,29 +1,15 @@
-<script lang="ts" module>
+<script lang="ts">
     import blogOld from "./assets/blog-old.png";
     import blogPre from "./assets/blog-pre.png";
     import blogPost1 from "./assets/blog-post-1.png";
     import blogPost2 from "./assets/blog-post-2.png";
-    import BlogBreadcrumbs from "$lib/components/Navigation/BlogBreadcrumbs.svelte";
 
-    export const metadata = {
-        title: "core Has Been Completed",
-        description:
-            "A recap of core, its completion, as well as what comes next.",
-        tags: ["important", "announcement", "blog", "core", "monthly-recap"],
-        published: new Date("2026-08-13T00:00:00+09:00"),
-    };
+    import Meta from "#lib/components/Meta.svelte";
+    import { blogMetadata } from "../../../metadata";
 </script>
 
-<svelte:head>
-    <title>{metadata.title}</title>
-
-    <meta name="tags" content={metadata.tags.join(", ")} />
-</svelte:head>
-
 <section>
-    <BlogBreadcrumbs />
-
-    <h1>core Has Been Completed</h1>
+    <Meta metadata={blogMetadata["2026/08/core-has-been-completed"]} />
 
     <p>Hi,</p>
 

@@ -1,9 +1,20 @@
-<blockquote class="error">
-    <b class="col bright red">
-        The section you're looking at contains outdated information.
-    </b><br /><br />
+<script>
+    import WarnRed from "../IconBlocks/WarnRed.svelte";
+</script>
 
-    We do not regularly update older sections in order to preserve historical
-    documents and their original context. Please treat this information as
-    potentially outdated.
+<blockquote class="error">
+    <p>
+        <WarnRed />
+    </p>
+
+    <p>
+        <b class="col bright red">
+            this section you're currently looking at, is outdated!
+        </b>
+    </p>
+
+    <p>
+        please note that statements made here may not reflect my actual
+        opinions.
+    </p>
 </blockquote>

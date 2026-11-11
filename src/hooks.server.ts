@@ -1,20 +1,23 @@
-import { normalizePath } from "$lib/path";
+import { redirect } from "@sveltejs/kit";
+import type { Handle } from "@sveltejs/kit/hooks";
 
-import { redirect, type Handle } from "@sveltejs/kit";
+function normalizePath(path: string) {
+    if (path !== "/" && path.endsWith("/")) {
+        return path.slice(0, -1);
+    }
 
-type CoreRedirect = {
+    return path;
+}
+
+type LzRedirect = {
     from: string[];
     to: string;
     permanent?: boolean;
     preservePath?: boolean;
 };
 
-const redirects: CoreRedirect[] = [
-    {
-        from: ["/documents"],
-        to: "/docs",
-        preservePath: true,
-    },
+const redirects: LzRedirect[] = [
+    { from: ["/documents"], to: "/docs", preservePath: true },
     {
         from: ["/projects/videos", "/videos"],
         to: "https://www.youtube.com/@lapis-lanzuli",
@@ -24,42 +27,18 @@ const redirects: CoreRedirect[] = [
         to: "/changelog",
         preservePath: true,
     },
-    {
-        from: ["/docs/blog"],
-        to: "/blog",
-        preservePath: true,
-    },
-    {
-        from: ["/docs/shitter"],
-        to: "/docs/shitter/intro",
-    },
-    {
-        from: ["/site-map"],
-        to: "/map",
-        preservePath: true,
-    },
-    {
-        from: ["/testing", "/tests"],
-        to: "/test",
-    },
+    { from: ["/docs/blog"], to: "/blog", preservePath: true },
+    { from: ["/docs/shitter"], to: "/docs/shitter/intro" },
+    { from: ["/site-map"], to: "/map", preservePath: true },
+    { from: ["/testing", "/tests"], to: "/test" },
     {
         from: ["/legacy", "/archived", "/archive"],
         to: "https://legacy.lanzoor.dev",
         preservePath: true,
     },
     {
-        from: ["/legal/tos", "/legal/terms-of-service", "/tos", "/terms"],
-        to: "/legal/terms",
-        preservePath: true,
-    },
-    {
-        from: ["/privacy-policy", "/privacy", "/legal/privacy-policy"],
-        to: "/legal/privacy",
-        preservePath: true,
-    },
-    {
-        from: ["/api"],
-        to: "https://api.lanzoor.dev",
+        from: ["/privacy"],
+        to: "/privacy-policy",
         preservePath: true,
     },
     {
@@ -82,37 +61,15 @@ const redirects: CoreRedirect[] = [
         from: ["/it-all-stops"],
         to: "https://www.youtube.com/watch?v=xMHJGd3wwZk",
     },
-    {
-        from: ["/it-all-japanese"],
-        to: "https://www.youtube.com/watch?v=RrESvSRNpeo",
-    },
 
     {
         from: ["/repo", "/source", "/source-code"],
-        to: "https://github.com/Lanzoor/core",
+        to: "https://github.com/lapis-lanzuli/core",
         preservePath: true,
     },
     {
         from: ["/projects/anti-lanzoor"],
         to: "https://archive.lanzoor.dev/anti-lanzoor",
-        preservePath: true,
-    },
-    {
-        from: ["/docs/personal-dict/commit-more-more-jump"],
-        to: "/docs/personal-dict/commit-mmj",
-        preservePath: true,
-    },
-    {
-        from: ["/docs/personal-dict/wuduhell"],
-        to: "/docs/personal-dict/wuduhel",
-        preservePath: true,
-    },
-    {
-        from: [
-            "/docs/personal-dict/wysi",
-            "/docs/personal-dict/when-you-see-it",
-        ],
-        to: "/docs/personal-dict/727",
         preservePath: true,
     },
 ];

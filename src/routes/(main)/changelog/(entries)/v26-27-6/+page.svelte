@@ -1,15 +1,14 @@
-<script lang="ts" module>
-    export const metadata = {
-        published: new Date("2026-08-08T00:00:00+09:00"),
-    };
+<script lang="ts">
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h1>Minor update v26.27.6</h1>
-
-    <p class="dim">
-        Release date: <b>August 8th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-27-6"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
@@ -29,7 +28,7 @@
         <li>
             <span class="col bright green">+</span>
             Added donations information page at
-            <a href="/about/donations">/about/donations</a>.
+            <Ia href="/about/donations">/about/donations</Ia>.
         </li>
         <li>
             <span class="col bright yellow">~</span>
@@ -44,7 +43,7 @@
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Improved the design of the <a href="/404">404</a> page.
+            Improved the design of the <Ia href="/404">404</Ia> page.
         </li>
         <li>
             <span class="col bright yellow">~</span>
@@ -56,11 +55,11 @@
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Updated the <a href="/profile">profile</a> page.
+            Updated the <Ia href="/profile">profile</Ia> page.
         </li>
         <li>
             <span class="col bright yellow">~</span>
-            Updated the <a href="/about">about</a> page.
+            Updated the <Ia href="/about">about</Ia> page.
         </li>
         <li>
             <span class="col bright yellow">~</span>

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { page } from "$app/state";
-    import { navigationOverlay } from "$lib/overlays.svelte";
+    import { navigationOverlay } from "#lib/overlays.svelte.js";
     import { Ba, Ia } from "../Links";
 
     type NavigationLink = {

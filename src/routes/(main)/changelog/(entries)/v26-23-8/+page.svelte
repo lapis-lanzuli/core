@@ -1,15 +1,14 @@
 <script lang="ts">
-    export const metadata = {
-        published: new Date("2026-06-15T00:00:00+09:00"),
-    };
+    import { Ia } from "#lib/components/Links/index.js";
+    import Meta from "#lib/components/Meta.svelte";
+    import { changelogMetadata } from "../metadata";
 </script>
 
 <section>
-    <h2>Minor update v26.23.8</h2>
-
-    <p class="dim">
-        Release date: <b>June 15th, 2026</b>
-    </p>
+    <Meta
+        metadata={changelogMetadata["v26-23-8"]}
+        lastUpdatedFormat={"released"}
+    />
 
     <ul>
         <li>
@@ -20,7 +19,7 @@
         <li>
             <span class="col bright yellow">~</span>
             Reworked the entirety of
-            <a href="/credits/contributors/">the contributors page</a>, and
+            <Ia href="/credits/contributors/">the contributors page</Ia>, and
             implemented a better convention for contributor roles.
         </li>
     </ul>
