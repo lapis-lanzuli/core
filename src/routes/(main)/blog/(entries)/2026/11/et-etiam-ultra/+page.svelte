@@ -279,4 +279,13 @@
         Lanzaforge domains) because i didn't want to just. keep an unfinished project
         sitting there.
     </p>
+
+    <hr />
+
+    <p>ok, that's probably it! thanks for listening to me yap i guess.</p>
+
+    <p>
+        i do have finals to prepare for, so i will come back to programming in
+        around december. cya
+    </p>
 </section>

@@ -4,7 +4,7 @@
     import Deleted from "#lib/components/Information/Deleted.svelte";
 
     import Meta from "#lib/components/Meta.svelte";
-    import { blogMetadata } from "../../metadata";
+    import { blogMetadata } from "../../../metadata";
 </script>
 
 <section>
