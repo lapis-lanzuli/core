@@ -1,10 +1,4 @@
-<script>
-    import Breadcrumbs from "#lib/components/Navigation/Breadcrumbs.svelte";
-</script>
-
 <section>
-    <Breadcrumbs />
-
     <h1>Changelog Conventions</h1>
 
     <h2>Naming Conventions for Changes</h2>
