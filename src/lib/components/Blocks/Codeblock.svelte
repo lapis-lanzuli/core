@@ -20,7 +20,7 @@
         </div>
 
         <button onclick={() => navigator.clipboard.writeText(code)}>
-            Copy
+            yoink
         </button>
     </div>
 
@@ -34,10 +34,9 @@
         margin: 1.5em 0;
 
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 0.75em;
+        border-radius: 0.1rem;
 
         background: #1a1b26;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 
         user-select: text;
     }
@@ -51,7 +50,7 @@
 
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
-        background: rgba(255, 255, 255, 0.025);
+        background: rgba(0, 0, 0, 0.75);
 
         color: rgba(255, 255, 255, 0.6);
 
@@ -66,17 +65,15 @@
     }
 
     .shiki-codeblock button {
-        padding: 0.3em 0.6em;
+        padding: 0.3rem 0.6rem;
 
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 0.4em;
 
         background: rgba(255, 255, 255, 0.04);
         color: rgba(255, 255, 255, 0.65);
 
-        font: inherit;
-
         cursor: pointer;
+        user-select: none;
 
         transition: 0.2s ease;
     }
@@ -99,8 +96,6 @@
 
         background: transparent;
 
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.9em;
         line-height: 1.65;
     }
 
@@ -108,5 +103,8 @@
         display: block;
         width: max-content;
         min-width: 100%;
+
+        background: transparent;
+        font-size: 0.8rem;
     }
 </style>
