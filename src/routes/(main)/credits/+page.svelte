@@ -3,19 +3,17 @@
     import Meta from "#lib/components/Meta.svelte";
     import { Ba, Ia } from "#lib/components/Links/index.js";
     import { LzMeta, type LzMetadata } from "#lib/metadata.js";
+    import { formatDuration } from "#lib";
 
-    const dateCreated = "2026-02-08T09:30:00Z";
+    const dateCreated = new Date("2026-02-08T09:30:00Z");
 
-    const createdDiff = Math.floor(
-        (Date.now() - new Date(dateCreated).getTime()) / 86_400_000,
+    const createdDiffDays = Math.floor(
+        (Date.now() - dateCreated.getTime()) / 86_400_000,
     );
 
-    const updatedDiff = Math.ceil(
-        Math.abs(
-            LzMeta.lastUpdated.getTime() - new Date().setHours(0, 0, 0, 0),
-        ) /
-            (1000 * 60 * 60 * 24),
-    );
+    const createdDiff = formatDuration(dateCreated);
+
+    const updatedDiff = formatDuration(LzMeta.lastUpdated);
 
     export const metadata: LzMetadata = {
         title: "credits",
@@ -57,14 +55,15 @@
             <div>
                 <h2>days since creation</h2>
 
-                <h1 class="created">{createdDiff} days</h1>
+                <h1 class="created">{createdDiffDays} days</h1>
+                <h2 class="created-small">{createdDiff}</h2>
             </div>
 
             <div>
-                <h2>days since last update</h2>
+                <h2>time since last update</h2>
 
                 <h1 class="updated">
-                    {createdDiff !== 0 ? updatedDiff + " days" : "none"}
+                    {updatedDiff}
                 </h1>
             </div>
         </section>
@@ -246,6 +245,25 @@
     #roll .updated {
         font-weight: bold;
         font-size: 4rem;
+    }
+
+    #roll .created-small {
+        background: linear-gradient(
+            45deg,
+            hsl(0, 100%, 70%) 0%,
+            hsl(90, 100%, 70%) 25%,
+            hsl(180, 100%, 70%) 50%,
+            hsl(270, 100%, 70%) 75%,
+            hsl(360, 100%, 70%) 100%
+        );
+
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    #roll .updated {
+        font-size: 3rem;
     }
 
     #roll .created {
