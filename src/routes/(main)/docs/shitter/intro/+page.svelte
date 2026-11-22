@@ -8,7 +8,7 @@
         title: "Shitter Explained, For Real!!",
         description:
             "Over the past few years, a Discord user known by his many online aliases as Pl4y3r, Tobuchou General and much more, has been psychopathically tracking and spying on us, even going so far as to fake his death for dramatic effect and more.",
-        lastUpdated: "2026-11-10",
+        dates: { lastUpdated: "2026-11-10" },
         version: "v4.1",
     };
 </script>

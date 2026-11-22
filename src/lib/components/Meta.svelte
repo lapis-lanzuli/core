@@ -5,10 +5,8 @@
 
     let {
         metadata,
-        lastUpdatedFormat = "last-updated",
     }: {
         metadata: LzMetadata;
-        lastUpdatedFormat?: "last-updated" | "released";
     } = $props();
 
     const parentPath = $derived(page.url.pathname.replace(/\/[^/]+\/?$/, "/"));
@@ -42,18 +40,16 @@
             {metadata.title}
         </h1>
 
-        {#if metadata.lastUpdated || metadata.version}
+        {#if metadata.dates}
             <p class="dim">
-                {#if metadata.lastUpdated}
-                    {#if lastUpdatedFormat === "last-updated"}
-                        Last updated at <b>{metadata.lastUpdated}</b>
-                    {:else if lastUpdatedFormat === "released"}
-                        Released at <b>{metadata.lastUpdated}</b>
-                    {/if}
-                    <br />
+                {#if metadata.dates.lastUpdated}
+                    last updated at <b>{metadata.dates.lastUpdated}</b>
+                {/if}
+                {#if metadata.dates.released}
+                    released at <b>{metadata.dates.released}</b>
                 {/if}
                 {#if metadata.version}
-                    Current version: <b>{metadata.version}</b>
+                    current version: <b>{metadata.version}</b>
                 {/if}
             </p>
         {/if}

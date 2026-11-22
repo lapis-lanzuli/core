@@ -5,10 +5,7 @@
 </script>
 
 <section>
-    <Meta
-        metadata={changelogMetadata["v26-27-4"]}
-        lastUpdatedFormat={"released"}
-    />
+    <Meta metadata={changelogMetadata["v26-27-4"]} />
 
     <ul>
         <li>

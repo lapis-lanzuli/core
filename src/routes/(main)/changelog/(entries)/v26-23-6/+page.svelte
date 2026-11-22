@@ -4,10 +4,7 @@
 </script>
 
 <section>
-    <Meta
-        metadata={changelogMetadata["v26-23-6"]}
-        lastUpdatedFormat={"released"}
-    />
+    <Meta metadata={changelogMetadata["v26-23-6"]} />
 
     <p>Small update today.</p>
 

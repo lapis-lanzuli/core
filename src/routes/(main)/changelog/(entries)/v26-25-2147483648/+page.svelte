@@ -5,10 +5,7 @@
 </script>
 
 <section>
-    <Meta
-        metadata={changelogMetadata["v26-25-2147483648"]}
-        lastUpdatedFormat={"released"}
-    />
+    <Meta metadata={changelogMetadata["v26-25-2147483648"]} />
 
     <p>
         <b>This is the pre-release version of the Svelte port.</b><br />

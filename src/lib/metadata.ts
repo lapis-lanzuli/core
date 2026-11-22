@@ -5,7 +5,12 @@ export type LzMetadata = {
 
     ogType?: string;
     themeColor?: string;
-    lastUpdated?: string | Date;
+    dates?: {
+        lastUpdated?: string | Date;
+        released?: string | Date;
+        published?: string | Date;
+    };
+
     version?: string;
     tags?: string[];
 
@@ -16,7 +21,7 @@ export const descPlaceholder =
     "no description has been provided for this page!";
 
 export const LzMeta = {
-    lastUpdated: new Date("2026-11-17T22:00:00+09:00"),
-    version: "v26.29.0-1.2",
-    changelog: "/changelog/v26-29-0",
+    lastUpdated: new Date("2026-11-22T15:00:00+09:00"),
+    version: "v26.29.1",
+    changelog: "/changelog/v26-29-1",
 };

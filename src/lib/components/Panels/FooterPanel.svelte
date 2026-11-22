@@ -66,7 +66,7 @@
                     />
 
                     <span class="handle">
-                        @<span class="col bright purple">lapis-lanzuli</span>
+                        @<span class="col bright purple">lapis_lanzuli</span>
                     </span>
                 </Ba>
 

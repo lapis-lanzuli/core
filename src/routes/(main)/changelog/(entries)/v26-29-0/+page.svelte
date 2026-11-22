@@ -5,10 +5,7 @@
 </script>
 
 <section>
-    <Meta
-        metadata={changelogMetadata["v26-29-0"]}
-        lastUpdatedFormat={"released"}
-    />
+    <Meta metadata={changelogMetadata["v26-29-0"]} />
 
     <p>
         <b>long time no see everyone!!</b> i'm back from working on my
@@ -50,8 +47,7 @@
         </li>
         <li>
             <span class="col bright green">+</span>
-            <b>added more easter eggs!</b> in fact, there is one hidden right in this
-            page. good luck finding it!
+            <b>added more easter eggs!</b>
         </li>
         <li>
             <span class="col bright yellow">~</span>

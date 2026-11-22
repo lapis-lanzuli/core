@@ -83,7 +83,7 @@
 
                 <p>
                     <span class="date dim">
-                        {entry.lastUpdated}
+                        {entry.dates?.lastUpdated}
                     </span>
                     ⬩
                     {#each entry.tags as tag}
@@ -135,11 +135,9 @@
     .personal {
         color: var(--bright-red);
     }
-
     .website {
         color: var(--bright-yellow);
     }
-
     .article {
         color: var(--bright-green);
     }

@@ -145,9 +145,16 @@
                         </Ia>
                     </h2>
 
-                    <p class="dim">
-                        published on <b>{entry.lastUpdated}</b>
-                    </p>
+                    {#if entry.dates}
+                        <p class="dim">
+                            {#if entry.dates.published}
+                                published at <b>{entry.dates.published}</b>
+                            {/if}
+                            {#if entry.dates.lastUpdated}
+                                last updated at <b>{entry.dates.lastUpdated}</b>
+                            {/if}
+                        </p>
+                    {/if}
                 </li>
             {/each}
         </ul>

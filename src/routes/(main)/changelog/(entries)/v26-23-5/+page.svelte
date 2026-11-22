@@ -5,10 +5,7 @@
 </script>
 
 <section>
-    <Meta
-        metadata={changelogMetadata["v26-23-5"]}
-        lastUpdatedFormat={"released"}
-    />
+    <Meta metadata={changelogMetadata["v26-23-5"]} />
 
     <p>
         <b>This update is part of the navigation UI/UX overhaul.</b>

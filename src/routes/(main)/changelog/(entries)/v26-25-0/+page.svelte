@@ -5,10 +5,7 @@
 </script>
 
 <section>
-    <Meta
-        metadata={changelogMetadata["v26-25-0"]}
-        lastUpdatedFormat={"released"}
-    />
+    <Meta metadata={changelogMetadata["v26-25-0"]} />
 
     <p>
         <b>The Svelte migration process has been fully completed!</b><br />
