@@ -22,6 +22,6 @@ export const descPlaceholder =
 
 export const LzMeta = {
     lastUpdated: new Date("2026-11-22T15:00:00+09:00"),
-    version: "v26.29.1",
+    version: "v26.29.1-1",
     changelog: "/changelog/v26-29-1",
 };

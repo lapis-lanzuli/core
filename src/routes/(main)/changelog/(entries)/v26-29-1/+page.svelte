@@ -7,6 +7,11 @@
 <section>
     <Meta metadata={changelogMetadata["v26-29-1"]} />
 
+    <p>
+        this is gonna be the last update of november, i've got finals as well as
+        other projects to work on.
+    </p>
+
     <ul>
         <li>
             <span class="col bright yellow">~</span>

@@ -9,8 +9,8 @@ export namespace LzStorage {
         try {
             const storage = window.localStorage;
 
-            storage.setItem("__storage_test__", "1");
-            storage.removeItem("__storage_test__");
+            storage.setItem("emu_meaning", "smile");
+            storage.removeItem("emu_meaning");
 
             return storage;
         } catch {
